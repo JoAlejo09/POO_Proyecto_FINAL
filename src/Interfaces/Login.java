@@ -14,6 +14,7 @@ public class Login {
     private JCheckBox mantenerLaSesionIniciadaCheckBox;
     private JButton cancelarButton;
     public JPanel JPanelL;
+    private JComboBox cbRol;
     JFrame frame;
     MetodosBase metodos = new MetodosBase();
     Validaciones val = new Validaciones();
@@ -23,6 +24,8 @@ public class Login {
         bRegistrarse.setContentAreaFilled(false); // Evita el fondo del botón
         bRegistrarse.setFocusPainted(false);
         iniciarSesionButton.setEnabled(false);
+        cbRol.addItem("Administrador");
+        cbRol.addItem("Cliente");
         bRegistrarse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -71,11 +74,16 @@ public class Login {
         iniciarSesionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int log = metodos.validarLogin(tUsuario.getText(),new String(pPassword.getPassword()));
-                if(log==1) {
-                    //Se envia a ventana de Usuario
-                }else if(log==2){
-                    //Se envia a ventana de Administrador
+                String rol = (String) cbRol.getSelectedItem();
+                System.out.println(rol);
+                int rl = rol.compareTo("Cliente");
+                int log = metodos.validarLogin(rol,tUsuario.getText(),new String(pPassword.getPassword()));
+                if((rl>0||rl<0)&log>0) {
+                    JOptionPane.showMessageDialog(null,"Bienvenido Administrador","",1);
+                    //Se envia a ventana Administrador
+                }else if(rl==0 && log>0){
+                    //Se envia a ventana de Cliente
+                    JOptionPane.showMessageDialog(null,"Bienvenido Cliente","",1);
                 }else{
                     JOptionPane.showMessageDialog(null,"Correo o Contraseña incorrectos.","",0);
                     tUsuario.setText("");
