@@ -49,20 +49,22 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="d6ced" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+              <component id="d6ced" class="javax.swing.JTextField" binding="tUsuario">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
                     <preferred-size width="250" height="-1"/>
                   </grid>
                 </constraints>
-                <properties/>
+                <properties>
+                  <text value=""/>
+                </properties>
               </component>
               <component id="3f9e4" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Usuario o Correo: "/>
+                  <text value="Correo Electronico: "/>
                 </properties>
               </component>
               <component id="c5458" class="javax.swing.JLabel">
@@ -73,7 +75,7 @@
                   <text value="Contraseña: "/>
                 </properties>
               </component>
-              <component id="e590c" class="javax.swing.JPasswordField" binding="passwordField1" default-binding="true">
+              <component id="e590c" class="javax.swing.JPasswordField" binding="pPassword">
                 <constraints>
                   <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
                     <preferred-size width="250" height="-1"/>
@@ -118,7 +120,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="732c3" class="javax.swing.JButton" binding="iniciarSesionButton" default-binding="true">
+          <component id="732c3" class="javax.swing.JButton" binding="iniciarSesionButton">
             <constraints/>
             <properties>
               <text value="Iniciar Sesion"/>
