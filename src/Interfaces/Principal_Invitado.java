@@ -1,5 +1,7 @@
 package Interfaces;
 
+import Clases.Metodos;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,18 +15,12 @@ public class Principal_Invitado {
     private JButton salirButton;
     private JTextField textField1;
     JFrame frame = new JFrame();
+    Metodos met;
 
     public Principal_Invitado(){
-        iniciarSesionButton.setBorder(null); // Quita el borde
-        iniciarSesionButton.setContentAreaFilled(false); // Evita el fondo del botón
-        iniciarSesionButton.setFocusPainted(false);
-        registrarseButton.setBorder(null); // Quita el borde
-        registrarseButton.setContentAreaFilled(false); // Evita el fondo del botón
-        registrarseButton.setFocusPainted(false);
-        salirButton.setBorder(null); // Quita el borde
-        salirButton.setContentAreaFilled(false); // Evita el fondo del botón
-        salirButton.setFocusPainted(false);
-
+        modificarBoton(iniciarSesionButton);
+        modificarBoton(registrarseButton);
+        modificarBoton(salirButton);
         mCatalogo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -40,22 +36,20 @@ public class Principal_Invitado {
         iniciarSesionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.setContentPane(new Login().JPanelL);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(400, 350);
-                frame.setVisible(true);
-                frame.setLocationRelativeTo(null);
+                met= new Metodos(new Login().JPanelL,400,350);
             }
         });
         registrarseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.setContentPane(new Registrarse().JPanelR);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(500, 300);
-                frame.setVisible(true);
-                frame.setLocationRelativeTo(null);
+                met= new Metodos(new Registrarse().JPanelR,500,300);
             }
         });
+    }
+    public void modificarBoton(JButton boton){
+        boton.setBorder(null); // Quita el borde
+        boton.setContentAreaFilled(false); // Evita el fondo del botón
+        boton.setFocusPainted(false);
+
     }
 }
