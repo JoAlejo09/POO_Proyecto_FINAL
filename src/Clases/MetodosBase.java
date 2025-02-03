@@ -2,6 +2,7 @@ package Clases;
 
 import com.mysql.cj.x.protobuf.MysqlxPrepare;
 
+import javax.swing.*;
 import java.sql.*;
 
 public class MetodosBase {
@@ -43,7 +44,25 @@ public class MetodosBase {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    public boolean insertarCliente(String nombre, String apellido,String correo, String contrasena, String cedula, String direccion){
+        String sql ="INSERT INTO Cliente (NombreCompleto, CorreoElectronico, Contrasena, Cedula, Direccion) VALUES (?,?,?,?,?)";
+        boolean rt = false;
+        try{
+            PreparedStatement pstmt = cn.prepareStatement(sql) ;
+            pstmt.setString(1,nombre+" "+apellido);
+            pstmt.setString(2,correo);
+            pstmt.setString(3,contrasena);
+            pstmt.setString(4,cedula);
+            pstmt.setString(5,direccion);
+            int filasInsertadas = pstmt.executeUpdate();
+            if (filasInsertadas > 0) {
+                rt = true;
+            }
+        }catch (SQLException e){
 
+        }
+        return rt;
     }
 
 }
