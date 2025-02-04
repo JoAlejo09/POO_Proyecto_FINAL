@@ -20,7 +20,8 @@ public class Principal_Invitado {
     private JLabel LIcono;
     private JLabel LLogo;
     JFrame frame = new JFrame();
-    Metodos met;
+    Metodos met = new Metodos(frame);
+    JPanel panel;
 
     public Principal_Invitado(){
         modificarBoton(iniciarSesionButton);
@@ -31,14 +32,16 @@ public class Principal_Invitado {
         mCatalogo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                met = new Metodos(new Pantalla_p().panel1,300,600);
-
+                panel = new Pantalla_p().panel1;
+                met.generarVentana("",panel,300,600);
+                met.cerrarVentana(JPanelP);
             }
         });
         mCategorias.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                met = new Metodos(new Pantalla_p().panel1,300,600);
+                panel = new Pantalla_p().panel1;
+                met.generarVentana("",panel,300,600);
             }
         });
         //acciones de los botones
@@ -51,13 +54,17 @@ public class Principal_Invitado {
         iniciarSesionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                met= new Metodos(new Login().JPanelL,400,350);
+                panel = new Login().JPanelL;
+                met.generarVentana("",panel,400,350);
+                met.cerrarVentana(JPanelP);
             }
         });
         registrarseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                met= new Metodos(new Registrarse().JPanelR,500,300);
+                panel = new Registrarse().JPanelR;
+                met.generarVentana("",panel,500,300);
+                met.cerrarVentana(JPanelP);
             }
         });
     }

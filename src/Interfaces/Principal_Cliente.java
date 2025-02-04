@@ -19,7 +19,9 @@ public class Principal_Cliente {
     private JButton salirButton;
     private JLabel LIcono;
     private JLabel LLogo;
-    Metodos met;
+    JFrame frame = new JFrame();
+    Metodos met = new Metodos(frame);
+    JPanel panel;
 
     public Principal_Cliente(){
         anadirIcono();
@@ -36,7 +38,8 @@ public class Principal_Cliente {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null,"CERRANDO SESION.....","",0);
-                met = new Metodos(new Principal_Invitado().JPanelP,600,350);
+                panel = new Principal_Invitado().JPanelP;
+                met.generarVentana("",panel,600,350);
             }
         });
         salirButton.addActionListener(new ActionListener() {
@@ -50,7 +53,8 @@ public class Principal_Cliente {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null,"CERRANDO SESION.....","",0);
-                met = new Metodos(new Login().JPanelL,400,350);
+                panel = new Login().JPanelL;
+                met.generarVentana("",panel,400,350);
             }
         });
     }

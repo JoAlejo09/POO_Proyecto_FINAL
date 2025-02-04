@@ -17,8 +17,9 @@ public class Login {
     private JButton cancelarButton;
     public JPanel JPanelL;
     private JComboBox cbRol;
-    JFrame frame;
-    Metodos met;
+    JFrame frame = new JFrame();
+    JPanel panel;
+    Metodos met = new Metodos(frame);
     MetodosBase metodos = new MetodosBase();
     Validaciones val = new Validaciones();
 
@@ -32,7 +33,8 @@ public class Login {
         bRegistrarse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                met = new Metodos(new Registrarse().JPanelR,500,300);
+                panel=new Registrarse().JPanelR;
+                met.generarVentana("",panel,500,300);
             }
         });
         tUsuario.addFocusListener(new FocusAdapter() {
@@ -82,12 +84,23 @@ public class Login {
                     //Se envia a ventana Administrador
                 }else if(rl==0 && log>0){
                     JOptionPane.showMessageDialog(null,"Bienvenido Cliente","",1);
-                    met = new Metodos(new Principal_Cliente().JPanelPC,800,350);
+                    panel = new Principal_Cliente().JPanelPC;
+                    met.generarVentana("",panel,800,350);
+                    met.cerrarVentana(JPanelL);
                 }else{
                     JOptionPane.showMessageDialog(null,"Correo o Contraseña incorrectos.","",0);
                     tUsuario.setText("");
                     pPassword.setText("");
                 }
+            }
+        });
+        cancelarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panel = new Principal_Invitado().JPanelP;
+                met = new Metodos(frame);
+                met.generarVentana("",panel,600,350);
+                met.cerrarVentana(JPanelL);
             }
         });
     }

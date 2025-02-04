@@ -1,11 +1,8 @@
 //proyecto poo
 //OCHOA,BETANCOURT,CARDENAS,PILA
 
-
-
 package Clases;
 
-import com.mysql.cj.x.protobuf.MysqlxPrepare;
 
 import javax.swing.*;
 import java.sql.*;
@@ -22,9 +19,6 @@ public class MetodosBase {
     public MetodosBase() { //Inicializacion de la conexion
         try {
             cn = DriverManager.getConnection(url, user, password);
-            /*if(cn.isValid(5)){
-                System.out.println("Conexion Establecida");
-            }*/
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -34,7 +28,7 @@ public class MetodosBase {
         String sql = "";
         int val = rol.compareTo("Cliente");
         if (val < 0 || val > 0) {
-            sql = "SELECT COUNT(*) FROM Administrador WHERE usuario = ? AND contrasena = ?";
+            sql = "SELECT id FROM Administrador WHERE usuario = ? AND contrasena = ?";
         } else {
             sql = "SELECT id FROM Cliente WHERE CorreoElectronico = ? AND Contrasena = ?";
         }

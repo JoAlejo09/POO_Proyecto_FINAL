@@ -15,7 +15,7 @@ import java.util.List;
 public class Pantalla_p {
     public JPanel panel1;
     private JTextField ingreso_de_busqueda;
-    private JButton boton_de_registrarse;
+    private JButton boton_de_volver;
     private JButton boton_de_logearse;
     private JTable tabla_de_productos;
     private JTree categorias_de_productos;
@@ -30,13 +30,13 @@ public class Pantalla_p {
         // Añadir listener al botón de búsqueda
         boton_de_busqueda.addActionListener(e -> realizarBusqueda());
         // Acciones de los botones
-        boton_de_registrarse.addActionListener(e -> {
-            abrirFormularioRegistro();
-            cerrarPantalla();  // Cerrar la ventana actual
+        boton_de_volver.addActionListener(e -> {
+            /*abrirFormularioRegistro();
+            cerrarPantalla();  // Cerrar la ventana actual*/
         });
         boton_de_logearse.addActionListener(e -> {
-            abrirFormularioLogin();
-            cerrarPantalla();  // Cerrar la ventana actual
+/*            abrirFormularioLogin();
+            cerrarPantalla();  // Cerrar la ventana actual*/
         });
     }
 
@@ -209,7 +209,7 @@ public class Pantalla_p {
         });
     }
 
-    private void abrirFormularioRegistro() {
+/*    private void abrirFormularioRegistro() {
         JFrame frame = new JFrame("Formulario de Registro");
         frame.setContentPane(new Registrarse().JPanelR);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -225,7 +225,7 @@ public class Pantalla_p {
         frame.pack();
         frame.setLocationRelativeTo(null);  // Centrar ventana
         frame.setVisible(true);
-    }
+    }*/
 
     // Método para cerrar la ventana actual
     private void cerrarPantalla() {
