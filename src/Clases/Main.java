@@ -1,3 +1,5 @@
+//proyecto poo
+//OCHOA,BETANCOURT,CARDENAS,PILA
 package Clases;
 
 import Interfaces.Principal_Invitado;
