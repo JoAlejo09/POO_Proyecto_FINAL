@@ -1,3 +1,8 @@
+//proyecto poo
+//OCHOA,BETANCOURT,CARDENAS,PILA
+
+
+
 package Clases;
 
 import com.mysql.cj.x.protobuf.MysqlxPrepare;
