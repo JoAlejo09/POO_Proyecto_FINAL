@@ -2,6 +2,7 @@
 //OCHOA,BETANCOURT,CARDENAS,PILA
 package Clases;
 
+import Interfaces.Principal_Cliente;
 import Interfaces.Principal_Invitado;
 
 import javax.swing.*;
@@ -11,4 +12,5 @@ public class Main{
     public static void main(String[] args) {
         Metodos met = new Metodos(new Principal_Invitado().JPanelP,600,350);
     }
+
 }

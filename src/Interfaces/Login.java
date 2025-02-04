@@ -2,6 +2,7 @@
 //OCHOA,BETANCOURT,CARDENAS,PILA
 package Interfaces;
 
+import Clases.Metodos;
 import Clases.MetodosBase;
 import Clases.Validaciones;
 import javax.swing.*;
@@ -17,6 +18,7 @@ public class Login {
     public JPanel JPanelL;
     private JComboBox cbRol;
     JFrame frame;
+    Metodos met;
     MetodosBase metodos = new MetodosBase();
     Validaciones val = new Validaciones();
 
@@ -30,11 +32,7 @@ public class Login {
         bRegistrarse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.setContentPane(new Registrarse().JPanelR);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(500, 300);
-                frame.setVisible(true);
-                frame.setLocationRelativeTo(null);
+                met = new Metodos(new Registrarse().JPanelR,500,300);
             }
         });
         tUsuario.addFocusListener(new FocusAdapter() {
@@ -83,8 +81,8 @@ public class Login {
                     JOptionPane.showMessageDialog(null,"Bienvenido Administrador","",1);
                     //Se envia a ventana Administrador
                 }else if(rl==0 && log>0){
-                    //Se envia a ventana de Cliente
                     JOptionPane.showMessageDialog(null,"Bienvenido Cliente","",1);
+                    met = new Metodos(new Principal_Cliente().JPanelPC,800,350);
                 }else{
                     JOptionPane.showMessageDialog(null,"Correo o Contraseña incorrectos.","",0);
                     tUsuario.setText("");

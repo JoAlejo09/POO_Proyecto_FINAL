@@ -1,7 +1,5 @@
-//proyecto poo
-//OCHOA,BETANCOURT,CARDENAS,PILA
-
 package Interfaces;
+
 import Clases.Metodos;
 
 import javax.swing.*;
@@ -9,55 +7,50 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Principal_Invitado {
-    public JPanel JPanelP;
+public class Principal_Cliente {
+    private JTextField textField1;
     private JMenuItem mCatalogo;
     private JMenuItem mCategorias;
-    private JButton iniciarSesionButton;
-    private JButton registrarseButton;
+    public JPanel JPanelPC;
+    private JMenuItem mFacturas;
+    private JMenuItem mCarrito;
+    private JButton cerrarSesionButton;
+    private JButton cambiarUsuarioButton;
     private JButton salirButton;
-    private JTextField labelTextField;
     private JLabel LIcono;
     private JLabel LLogo;
-    JFrame frame = new JFrame();
     Metodos met;
 
-    public Principal_Invitado(){
-        modificarBoton(iniciarSesionButton);
-        modificarBoton(registrarseButton);
-        modificarBoton(salirButton);
+    public Principal_Cliente(){
         anadirIcono();
-        //Acciones del menu
+        modificarBoton(cambiarUsuarioButton);
+        modificarBoton(cerrarSesionButton);
+        modificarBoton(salirButton);
         mCatalogo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                met = new Metodos(new Pantalla_p().panel1,300,600);
 
             }
         });
-        mCategorias.addActionListener(new ActionListener() {
+        cerrarSesionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                met = new Metodos(new Pantalla_p().panel1,300,600);
+                JOptionPane.showMessageDialog(null,"CERRANDO SESION.....","",0);
+                met = new Metodos(new Principal_Invitado().JPanelP,600,350);
             }
         });
-        //acciones de los botones
         salirButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null,"GRACIAS POR USAR LA TIENDA EN LINEA","",0);
                 System.exit(0);
             }
         });
-        iniciarSesionButton.addActionListener(new ActionListener() {
+        cambiarUsuarioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                met= new Metodos(new Login().JPanelL,400,350);
-            }
-        });
-        registrarseButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                met= new Metodos(new Registrarse().JPanelR,500,300);
+                JOptionPane.showMessageDialog(null,"CERRANDO SESION.....","",0);
+                met = new Metodos(new Login().JPanelL,400,350);
             }
         });
     }
@@ -65,7 +58,13 @@ public class Principal_Invitado {
         boton.setBorder(null); // Quita el borde
         boton.setContentAreaFilled(false); // Evita el fondo del botón
         boton.setFocusPainted(false);
-
+    }
+    public void añadirLogo(){
+        ImageIcon originalIcon = new ImageIcon(getClass().getResource("/recursos/logo2.png"));
+        LLogo.setIcon(originalIcon);
+        LLogo.setText("");
+        LLogo.setHorizontalAlignment(JLabel.CENTER);
+        LLogo.setBounds(10, 10, 50, 50);
     }
     public void anadirIcono(){
         ImageIcon originalIcon = new ImageIcon(getClass().getResource("/recursos/buscar.png"));
@@ -76,6 +75,6 @@ public class Principal_Invitado {
         LIcono.setIcon(resizedIcon);
         LIcono.setText("");
         LIcono.setHorizontalAlignment(JLabel.CENTER);
-        LIcono.setBounds(10, 10, 40, 40);
+        LIcono.setBounds(10, 50, 10, 10);
     }
 }
