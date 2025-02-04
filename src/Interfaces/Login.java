@@ -2,7 +2,6 @@ package Interfaces;
 
 import Clases.MetodosBase;
 import Clases.Validaciones;
-
 import javax.swing.*;
 import java.awt.event.*;
 

@@ -1,3 +1,6 @@
+//proyecto poo
+//OCHOA,BETANCOURT,CARDENAS,PILA
+
 package Clases;
 
 import javax.swing.*;
