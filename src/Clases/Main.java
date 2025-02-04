@@ -9,7 +9,7 @@ public class Main{
     public static void main(String[] args) {
         JFrame frame = new JFrame();
         Metodos met = new Metodos(frame);
-        JPanel panel = new Principal_Invitado().JPanelP;
+        JPanel panel = new Principal_Invitado(0).JPanelP;
         met.generarVentana("",panel,600,350);
     }
 }

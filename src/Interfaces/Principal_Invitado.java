@@ -22,8 +22,9 @@ public class Principal_Invitado {
     JFrame frame = new JFrame();
     Metodos met = new Metodos(frame);
     JPanel panel;
-
-    public Principal_Invitado(){
+    private int estado;
+    public Principal_Invitado(int estado){
+        this.estado = estado;
         modificarBoton(iniciarSesionButton);
         modificarBoton(registrarseButton);
         modificarBoton(salirButton);
@@ -33,7 +34,7 @@ public class Principal_Invitado {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panel = new Pantalla_p().panel1;
-                met.generarVentana("",panel,300,600);
+                met.generarVentana("",panel,600,300);
                 met.cerrarVentana(JPanelP);
             }
         });
@@ -54,7 +55,7 @@ public class Principal_Invitado {
         iniciarSesionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panel = new Login().JPanelL;
+                panel = new Login(0).JPanelL;
                 met.generarVentana("",panel,400,350);
                 met.cerrarVentana(JPanelP);
             }
@@ -62,7 +63,7 @@ public class Principal_Invitado {
         registrarseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panel = new Registrarse().JPanelR;
+                panel = new Registrarse(0).JPanelR;
                 met.generarVentana("",panel,500,300);
                 met.cerrarVentana(JPanelP);
             }

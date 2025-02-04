@@ -24,13 +24,13 @@ public class Registrarse {
     JPanel panel;
     Metodos met= new Metodos(frame);
     MetodosBase bas = new MetodosBase();
-    public Registrarse(){
+    public Registrarse(int estado){
         bLogin.setBorder(null); // Quita el borde
         bLogin.setContentAreaFilled(false);
         bLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panel = new Login().JPanelL;
+                panel = new Login(0).JPanelL;
                 met.generarVentana("",panel,400,350);
             }
         });
@@ -61,7 +61,7 @@ public class Registrarse {
                         tDireccion.getText());
                 if(rs){
                     JOptionPane.showMessageDialog(null,"USUARIO INGRESADO CORRECTAMENTE","",0);
-                    panel = new Login().JPanelL;
+                    panel = new Login(0).JPanelL;
                     met.generarVentana("",panel,400,350);
                 }else{
                     JOptionPane.showMessageDialog(null,"NO SE HA PODIDO REGISTRAR EL USUARIO","",1);
@@ -86,7 +86,7 @@ public class Registrarse {
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panel = new Principal_Invitado().JPanelP;
+                panel = new Principal_Invitado(0).JPanelP;
                 met.generarVentana("",panel,600,350);
                 met.cerrarVentana(JPanelR);
             }

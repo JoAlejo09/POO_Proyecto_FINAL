@@ -9,16 +9,23 @@ import java.sql.*;
 
 public class MetodosBase {
     //Metodo especificado para agregar conexion a base de datos y metodos sobre la base de datos
+   /* private static final String HOST="bdbsjb7v8o8wa0pot4lt-mysql.services.clever-cloud.com";
+    private static final String DB="bdbsjb7v8o8wa0pot4lt";
+    private static final String USER="uspitlplqxwpi1ft";
+    private static final String PORT="3306";
+    private static final String PASSWORD="vDVAQEeEPO9pvXHzs0ih";
+    private static final String URL = "jdbc:mysql://"+HOST+":"+PORT+"/"+DB; //DIRECCIONAMIENTO DE LA BASE DE DATOS PARA CONEXION EN LA NUBE
+*/
 
-    private String url = "jdbc:mysql://localhost:3306/tienda_db";
-    private String user = "root";
-    private String password = "root";
+    private String URL = "jdbc:mysql://localhost:3306/tienda_db";
+    private String USER = "root";
+    private String PASSWORD = "root";
     Connection cn;
     ResultSet rs;
 
     public MetodosBase() { //Inicializacion de la conexion
         try {
-            cn = DriverManager.getConnection(url, user, password);
+            cn = DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -89,5 +96,20 @@ public class MetodosBase {
 
         }
         return rs;
+    }
+    public String hallarNombre(int id){
+        String query = "SELECT NombreCompleto FROM Cliente WHERE id = ?";
+        try{
+            PreparedStatement pstmt = cn.prepareStatement(query);
+            pstmt.setInt(1, id);
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+                return rs.getString(1);
+            }else{
+                return null;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

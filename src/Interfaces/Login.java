@@ -22,8 +22,8 @@ public class Login {
     Metodos met = new Metodos(frame);
     MetodosBase metodos = new MetodosBase();
     Validaciones val = new Validaciones();
-
-    public Login (){
+    public int est;
+    public Login (int estado){
         bRegistrarse.setBorder(null); // Quita el borde
         bRegistrarse.setContentAreaFilled(false); // Evita el fondo del botón
         bRegistrarse.setFocusPainted(false);
@@ -33,7 +33,7 @@ public class Login {
         bRegistrarse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panel=new Registrarse().JPanelR;
+                panel=new Registrarse(0).JPanelR;
                 met.generarVentana("",panel,500,300);
             }
         });
@@ -64,12 +64,6 @@ public class Login {
 
             }
         });
-        iniciarSesionButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
         tUsuario.addComponentListener(new ComponentAdapter() {
         });
         iniciarSesionButton.addActionListener(new ActionListener() {
@@ -82,9 +76,11 @@ public class Login {
                 if((rl>0||rl<0)&log>0) {
                     JOptionPane.showMessageDialog(null,"Bienvenido Administrador","",1);
                     //Se envia a ventana Administrador
+                    est=1;
                 }else if(rl==0 && log>0){
                     JOptionPane.showMessageDialog(null,"Bienvenido Cliente","",1);
-                    panel = new Principal_Cliente().JPanelPC;
+                    est=1;
+                    panel = new Principal_Cliente(est,log).JPanelPC;
                     met.generarVentana("",panel,800,350);
                     met.cerrarVentana(JPanelL);
                 }else{
@@ -97,7 +93,7 @@ public class Login {
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panel = new Principal_Invitado().JPanelP;
+                panel = new Principal_Invitado(est).JPanelP;
                 met = new Metodos(frame);
                 met.generarVentana("",panel,600,350);
                 met.cerrarVentana(JPanelL);

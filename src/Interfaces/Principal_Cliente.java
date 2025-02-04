@@ -1,6 +1,7 @@
 package Interfaces;
 
 import Clases.Metodos;
+import Clases.MetodosBase;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,12 +19,16 @@ public class Principal_Cliente {
     private JButton cambiarUsuarioButton;
     private JButton salirButton;
     private JLabel LIcono;
+    private JLabel LCliente;
     private JLabel LLogo;
     JFrame frame = new JFrame();
     Metodos met = new Metodos(frame);
+    MetodosBase bas = new MetodosBase();
     JPanel panel;
 
-    public Principal_Cliente(){
+    public Principal_Cliente(int estado,int id){
+        String nombre = bas.hallarNombre(id);
+        LCliente.setText("Usuario: "+nombre);
         anadirIcono();
         modificarBoton(cambiarUsuarioButton);
         modificarBoton(cerrarSesionButton);
@@ -38,7 +43,7 @@ public class Principal_Cliente {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null,"CERRANDO SESION.....","",0);
-                panel = new Principal_Invitado().JPanelP;
+                panel = new Principal_Invitado(0).JPanelP;
                 met.generarVentana("",panel,600,350);
             }
         });
@@ -53,7 +58,7 @@ public class Principal_Cliente {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null,"CERRANDO SESION.....","",0);
-                panel = new Login().JPanelL;
+                panel = new Login(1).JPanelL;
                 met.generarVentana("",panel,400,350);
             }
         });

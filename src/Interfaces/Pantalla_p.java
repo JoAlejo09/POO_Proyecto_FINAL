@@ -8,6 +8,8 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,14 +33,11 @@ public class Pantalla_p {
         boton_de_busqueda.addActionListener(e -> realizarBusqueda());
         // Acciones de los botones
         boton_de_volver.addActionListener(e -> {
-            /*abrirFormularioRegistro();
-            cerrarPantalla();  // Cerrar la ventana actual*/
-        });
-        boton_de_logearse.addActionListener(e -> {
-/*            abrirFormularioLogin();
-            cerrarPantalla();  // Cerrar la ventana actual*/
+            abrirFormularioRegistro();
+            cerrarPantalla();  // Cerrar la ventana actual
         });
     }
+
 
     private void inicializarComboBox() {
         buscar_segun.removeAllItems();
@@ -209,24 +208,14 @@ public class Pantalla_p {
         });
     }
 
-/*    private void abrirFormularioRegistro() {
+   private void abrirFormularioRegistro() {
         JFrame frame = new JFrame("Formulario de Registro");
-        frame.setContentPane(new Registrarse().JPanelR);
+        frame.setContentPane(new Registrarse(0).JPanelR);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);  // Centrar ventana
         frame.setVisible(true);
     }
-
-    private void abrirFormularioLogin() {
-        JFrame frame = new JFrame("Formulario de Login");
-        frame.setContentPane(new Login().JPanelL);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setLocationRelativeTo(null);  // Centrar ventana
-        frame.setVisible(true);
-    }*/
-
     // Método para cerrar la ventana actual
     private void cerrarPantalla() {
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(panel1); // Obtener la ventana que contiene el JPanel
