@@ -5,6 +5,7 @@ package Clases;
 
 
 import javax.swing.*;
+import java.io.File;
 import java.sql.*;
 
 public class MetodosBase {
@@ -111,5 +112,37 @@ public class MetodosBase {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    public boolean insertarProducto(String nombre, double precio,String marca,String descripcion,String categoria,int stock, byte[] imagen){
+        /*Id int AI PK
+        Nombre varchar(100)
+        Precio decimal(10,2)
+        Marca varchar(50)
+        Descripcion text
+        Categoria varchar(50)
+        Imagen blob
+        Stock int*/
+        String sql = "INSERT INTO Productos(Nombre, Precio, Marca, Descripcion, Categoria, Stock, Imagen )VALUES(?,?,?,?,?,?,?)";
+        boolean rt = false;
+        try {
+            PreparedStatement pstmt = cn.prepareStatement(sql);
+            pstmt.setString(1,nombre);
+            pstmt.setDouble(2,precio);
+            pstmt.setString(3,marca);
+            pstmt.setString(4,descripcion);
+            pstmt.setString(5,categoria);
+            pstmt.setInt(6,stock);
+            if (imagen != null) {
+                pstmt.setBytes(7, imagen);
+            }
+            int filasInsertadas = pstmt.executeUpdate();
+            if (filasInsertadas > 0) {
+                rt = true;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rt;
     }
 }

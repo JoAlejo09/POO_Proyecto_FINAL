@@ -42,7 +42,7 @@ public class Principal_Invitado {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panel = new Pantalla_p().panel1;
-                met.generarVentana("",panel,300,600);
+                met.generarVentana("",panel,600,300);
             }
         });
         //acciones de los botones

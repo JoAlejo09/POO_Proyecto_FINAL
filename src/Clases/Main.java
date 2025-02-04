@@ -1,6 +1,7 @@
 //proyecto poo
 //OCHOA,BETANCOURT,CARDENAS,PILA
 package Clases;
+import Interfaces.AgregarProducto;
 import Interfaces.Principal_Invitado;
 
 import javax.swing.*;

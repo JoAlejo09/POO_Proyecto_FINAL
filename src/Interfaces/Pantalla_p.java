@@ -210,7 +210,7 @@ public class Pantalla_p {
 
    private void abrirFormularioRegistro() {
         JFrame frame = new JFrame("Formulario de Registro");
-        frame.setContentPane(new Registrarse(0).JPanelR);
+        frame.setContentPane(new Principal_Invitado(0).JPanelP);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);  // Centrar ventana
