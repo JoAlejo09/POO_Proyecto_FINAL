@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Principal_Cliente {
-    private JTextField textField1;
     private JMenuItem mCatalogo;
     private JMenuItem mCategorias;
     public JPanel JPanelPC;
@@ -36,7 +35,7 @@ public class Principal_Cliente {
         mCatalogo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panel = new Pantalla_p(id).panel1;
+                panel = new Pantalla_p(1,id).panel1;
                 met.generarVentana("",panel,600,300);
                 met.cerrarVentana(JPanelPC);
             }
@@ -47,6 +46,7 @@ public class Principal_Cliente {
                 JOptionPane.showMessageDialog(null,"CERRANDO SESION.....","",0);
                 panel = new Principal_Invitado(0).JPanelP;
                 met.generarVentana("",panel,600,350);
+                met.cerrarVentana(JPanelPC);
             }
         });
         salirButton.addActionListener(new ActionListener() {
@@ -91,10 +91,5 @@ public class Principal_Cliente {
         Image img = originalIcon.getImage(); // Obtener la imagen
         Image scaledImg = img.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(scaledImg);
-
-        LIcono.setIcon(resizedIcon);
-        LIcono.setText("");
-        LIcono.setHorizontalAlignment(JLabel.CENTER);
-        LIcono.setBounds(10, 50, 10, 10);
     }
 }

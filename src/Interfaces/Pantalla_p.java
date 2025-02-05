@@ -19,47 +19,64 @@ public class Pantalla_p {
     public JPanel panel1;
     private JTextField ingreso_de_busqueda;
     private JButton boton_de_volver;
-    private JButton boton_de_logearse;
     private JTable tabla_de_productos;
     private JTree categorias_de_productos;
     private JButton boton_de_busqueda;
     private JComboBox<String> buscar_segun;
     private JButton agregarCarritoButton;
-    Metodos metodos;
+    private JButton editarProductoButton;
+    JFrame frame = new JFrame();
+    Metodos metodos= new Metodos(frame);
     MetodosBase met = new MetodosBase();
-    public Pantalla_p(int id) {
+    public Pantalla_p(int estado, int id) {
         cargarDatosEnTabla("TODOS");  // Inicializar con todos los productos
         cargarCategoriasEnTree();
         inicializarComboBox();
-        validarCarrito(id);
+        validarBotones(id,estado);
 
         // Añadir listener al botón de búsqueda
         boton_de_busqueda.addActionListener(e -> realizarBusqueda());
         // Acciones de los botones
         boton_de_volver.addActionListener(e -> {
-            abrirFormularioRegistro(id);
+            abrirFormularioRegistro(id,estado);
             metodos.cerrarVentana(panel1);  // Cerrar la ventana actual
         });
         agregarCarritoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                String producto = obtenerProducto();
+                try {
+                    metodos.generarVentana("",new AgregarCarrito(producto).JPanelAC,300,350);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
     }
-    private JPanel validarCierreVentana(int id){
-        if(id>0){
-            return  new Principal_Cliente(1,id).JPanelPC;
+    private JPanel validarCierreVentana(int id, int est){
+        JPanel panel = null;
+        if(est==1){
+            panel = new Principal_Cliente(1,id).JPanelPC;
+        }else if(est==0){
+            panel = new Principal_Invitado(0).JPanelP;
+        }else if(est==2){
+            //panel = new Principal_Administrador(2).JPanelAD;
         }else{
-            return new Principal_Invitado(0).JPanelP;
+            panel = null;
         }
-
+        return panel;
     }
-    private void validarCarrito(int id){
-        if(id>0){
-            agregarCarritoButton.setVisible(true);
-        }else{
+    private void validarBotones(int id,int est){
+        if(est==0){
             agregarCarritoButton.setVisible(false);
+            editarProductoButton.setVisible(false);
+        }else if(est==1){
+            agregarCarritoButton.setVisible(true);
+            editarProductoButton.setVisible(false);
+        }else if(est==2){
+            editarProductoButton.setVisible(true);
+        }else{
+
         }
     }
     private void inicializarComboBox() {
@@ -75,18 +92,9 @@ public class Pantalla_p {
         modelo.addColumn("Producto 2");
         modelo.addColumn("Producto 3");
 
-        // Crear la consulta según la categoría seleccionada
-        /*String query = "SELECT Id, Nombre, Precio, Marca, Descripcion, Categoria, Imagen, Stock FROM PRODUCTOS";
-        if (!categoria.equals("TODOS")) {
-            query += " WHERE Categoria = '" + categoria + "'";  // Filtrar por categoría
-        }*/
-
-        try /*(Connection conn = Conexion_DB.getConnection())*/ {
-            /*Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);*/
+        try {
             ResultSet rs = met.consultarProductos(categoria);
             List<ProductoCelda> listaProductos = new ArrayList<>();
-
             // Cargar los productos en una lista
             while (rs.next()) {
                 byte[] imagenBytes = rs.getBytes("Imagen");
@@ -97,7 +105,6 @@ public class Pantalla_p {
 
                 listaProductos.add(producto);
             }
-
             // Llenar la tabla con filas de 3 productos por fila
             for (int i = 0; i < listaProductos.size(); i += 3) {
                 Object[] fila = new Object[3];
@@ -151,11 +158,8 @@ public class Pantalla_p {
 
         // Realizar la búsqueda
         DefaultTableModel modelo = (DefaultTableModel) tabla_de_productos.getModel();
-        /*String query = "SELECT Id, Nombre, Precio, Marca, Descripcion, Categoria, Imagen, Stock FROM PRODUCTOS WHERE " + criterioBusqueda + " LIKE '%" + valorBusqueda + "%'";*/
 
-        try /*(Connection conn = Conexion_DB.getConnection())*/ {
-            /*Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);*/
+        try {
             ResultSet rs = met.realizarBusqueda(criterioBusqueda,valorBusqueda);
             List<ProductoCelda> listaProductos = new ArrayList<>();
 
@@ -237,10 +241,24 @@ public class Pantalla_p {
         });
     }
 
-   private void abrirFormularioRegistro(int id) {
+   private void abrirFormularioRegistro(int id, int est) {
        JFrame frame = new JFrame();
         metodos = new Metodos(frame);
-        metodos.generarVentana("",validarCierreVentana(id),600,350);
+        metodos.generarVentana("",validarCierreVentana(id,est),600,350);
+    }
+    private String obtenerProducto(){
+        int fila = tabla_de_productos.getSelectedRow();
+        int columna = tabla_de_productos.getSelectedColumn();
+        String nombreProducto="";
+
+        if (fila != -1 && columna != -1) { // Verificar que haya una celda seleccionada
+            ProductoCelda producto = (ProductoCelda) tabla_de_productos.getValueAt(fila, columna);
+            nombreProducto = producto.getNombre(); // Suponiendo que ProductoCelda tiene un método getNombre()
+            System.out.println("Producto seleccionado: " + nombreProducto);
+        } else {
+            System.out.println("No hay ninguna celda seleccionada.");
+        }
+        return nombreProducto;
     }
     // Método para cerrar la ventana actual
 

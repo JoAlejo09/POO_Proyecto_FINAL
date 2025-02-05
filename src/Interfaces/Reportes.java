@@ -70,6 +70,7 @@ public class Reportes {
             }
         });
     }
+
     //PARA CLIENTES
     public Reportes(int id){
        agregarBotones();

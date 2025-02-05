@@ -32,7 +32,7 @@ public class Principal_Invitado {
         mCatalogo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panel = new Pantalla_p(0).panel1;
+                panel = new Pantalla_p(0,0).panel1;
                 met.generarVentana("",panel,800,350);
                 met.cerrarVentana(JPanelP);
             }
@@ -40,7 +40,7 @@ public class Principal_Invitado {
         mCategorias.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panel = new Pantalla_p(0).panel1;
+                panel = new Pantalla_p(0,0).panel1;
                 met.generarVentana("",panel,800,350);
                 met.cerrarVentana(JPanelP);
             }

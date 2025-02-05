@@ -168,4 +168,33 @@ public class MetodosBase {
         }
         return rs;
     }
+    public ResultSet obtenerProductoCarrito(String producto){
+        String sql = "SELECT Id, Nombre, Precio, Marca, Categoria, Imagen, Stock FROM Productos WHERE Nombre = ?";
+        try {
+            PreparedStatement pstmt = cn.prepareStatement(sql);
+            pstmt.setString(1, producto);
+            rs = pstmt.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rs;
+    }
+    public boolean agregarCarrito(int id_producto, int cantidad){
+        String sql="INSERT INTO Carrito_drop( Id_producto, Cantidad) VALUES(?,?)";
+        boolean rt = false;
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = cn.prepareStatement(sql);
+            pstmt.setInt(1,id_producto);
+            pstmt.setInt(2,cantidad);
+            int filasInsertadas = pstmt.executeUpdate();
+            if (filasInsertadas > 0) {
+                rt = true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rt;
+    }
+
 }
