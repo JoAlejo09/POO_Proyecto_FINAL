@@ -16,13 +16,14 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="ca2b1" class="javax.swing.JLabel">
+          <component id="e5c62" class="javax.swing.JLabel">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <font size="20"/>
-              <text value="SMARTSHOP"/>
+              <font name="Cooper Black" style="2"/>
+              <icon value="Recursos/logo2.png"/>
+              <text value="DigiCore  "/>
             </properties>
           </component>
           <component id="d9753" class="javax.swing.JLabel">
@@ -33,11 +34,6 @@
               <text value="Registro de Informacion de nuevo usuario."/>
             </properties>
           </component>
-          <vspacer id="64e84">
-            <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-            </constraints>
-          </vspacer>
         </children>
       </grid>
       <vspacer id="928d5">

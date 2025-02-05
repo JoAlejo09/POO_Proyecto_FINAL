@@ -32,6 +32,7 @@ public class Registrarse {
             public void actionPerformed(ActionEvent e) {
                 panel = new Login(0).JPanelL;
                 met.generarVentana("",panel,400,350);
+                met.cerrarVentana(JPanelR);
             }
         });
         tDireccion.addFocusListener(new FocusAdapter() {
@@ -54,21 +55,17 @@ public class Registrarse {
                 super.keyTyped(e);
             }
         });
-        bRegistrarse.addActionListener(new ActionListener() {
+        tApellido.addKeyListener(new KeyAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean rs = bas.insertarCliente(tNombre.getText(),tApellido.getText(),tCorreo.getText(), new String(pContrasena.getPassword()),tCedula.getText(),
-                        tDireccion.getText());
-                if(rs){
-                    JOptionPane.showMessageDialog(null,"USUARIO INGRESADO CORRECTAMENTE","",0);
-                    panel = new Login(0).JPanelL;
-                    met.generarVentana("",panel,400,350);
-                }else{
-                    JOptionPane.showMessageDialog(null,"NO SE HA PODIDO REGISTRAR EL USUARIO","",1);
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+                    e.consume(); // Evita que el carácter se escriba en el JTextField
+                    //lblMensaje.setText("⚠ Solo se permiten letras");
+                } else {
+//                    lblMensaje.setText("✓ Correcto");
                 }
-
-
-
+                super.keyTyped(e);
             }
         });
         tCorreo.addFocusListener(new FocusAdapter() {
@@ -80,6 +77,24 @@ public class Registrarse {
                     JOptionPane.showMessageDialog(null,"CORREO INGRESADO INCORRECTAMENTE","",1);
                     tCorreo.setText("");
                 }
+
+            }
+        });
+        bRegistrarse.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean rs = bas.insertarCliente(tNombre.getText(),tApellido.getText(),tCorreo.getText(), new String(pContrasena.getPassword()),tCedula.getText(),
+                        tDireccion.getText());
+                if(rs){
+                    JOptionPane.showMessageDialog(null,"USUARIO INGRESADO CORRECTAMENTE","",1);
+                    panel = new Login(0).JPanelL;
+                    met.generarVentana("",panel,400,350);
+                    met.cerrarVentana(JPanelR);
+                }else{
+                    JOptionPane.showMessageDialog(null,"NO SE HA PODIDO REGISTRAR EL USUARIO","",1);
+                }
+
+
 
             }
         });

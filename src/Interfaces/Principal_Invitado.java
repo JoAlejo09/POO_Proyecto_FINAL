@@ -16,7 +16,6 @@ public class Principal_Invitado {
     private JButton iniciarSesionButton;
     private JButton registrarseButton;
     private JButton salirButton;
-    private JTextField labelTextField;
     private JLabel LIcono;
     private JLabel LLogo;
     JFrame frame = new JFrame();
@@ -33,16 +32,16 @@ public class Principal_Invitado {
         mCatalogo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panel = new Pantalla_p().panel1;
-                met.generarVentana("",panel,600,300);
+                panel = new Pantalla_p(0).panel1;
+                met.generarVentana("",panel,800,350);
                 met.cerrarVentana(JPanelP);
             }
         });
         mCategorias.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panel = new Pantalla_p().panel1;
-                met.generarVentana("",panel,600,300);
+                panel = new Pantalla_p(0).panel1;
+                met.generarVentana("",panel,800,350);
                 met.cerrarVentana(JPanelP);
             }
         });
@@ -65,7 +64,7 @@ public class Principal_Invitado {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panel = new Registrarse(0).JPanelR;
-                met.generarVentana("",panel,500,300);
+                met.generarVentana("",panel,550,350);
                 met.cerrarVentana(JPanelP);
             }
         });
@@ -82,9 +81,9 @@ public class Principal_Invitado {
         Image scaledImg = img.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(scaledImg);
 
-        LIcono.setIcon(resizedIcon);
+        /*LIcono.setIcon(resizedIcon);
         LIcono.setText("");
         LIcono.setHorizontalAlignment(JLabel.CENTER);
-        LIcono.setBounds(10, 10, 40, 40);
+        LIcono.setBounds(10, 10, 40, 40);*/
     }
 }

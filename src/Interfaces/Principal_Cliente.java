@@ -36,7 +36,9 @@ public class Principal_Cliente {
         mCatalogo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                panel = new Pantalla_p(id).panel1;
+                met.generarVentana("",panel,600,300);
+                met.cerrarVentana(JPanelPC);
             }
         });
         cerrarSesionButton.addActionListener(new ActionListener() {
@@ -60,6 +62,7 @@ public class Principal_Cliente {
                 JOptionPane.showMessageDialog(null,"CERRANDO SESION.....","",0);
                 panel = new Login(1).JPanelL;
                 met.generarVentana("",panel,400,350);
+                met.cerrarVentana(JPanelPC);
             }
         });
         mFacturas.addActionListener(new ActionListener() {
@@ -67,6 +70,7 @@ public class Principal_Cliente {
             public void actionPerformed(ActionEvent e) {
                 panel = new Reportes(id).JPanelRP;
                 met.generarVentana("",panel,600,300);
+                met.cerrarVentana(JPanelPC);
             }
         });
     }

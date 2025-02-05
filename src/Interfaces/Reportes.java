@@ -33,6 +33,7 @@ public class Reportes {
     MetodosBase base = new MetodosBase();
     ButtonGroup opciones;
     ResultSet rs;
+    DefaultTableModel modelo;
 
     //PARA ADMINISTRADOR
     public Reportes(){
@@ -62,6 +63,12 @@ public class Reportes {
                 metodos.cerrarVentana(JPanelRP);
             }
         });
+        generarPDFButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                generarReportesPDF();
+            }
+        });
     }
     //PARA CLIENTES
     public Reportes(int id){
@@ -87,10 +94,16 @@ public class Reportes {
        volverButton.addActionListener(new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
-               metodos.generarVentana("",new Principal_Cliente(1,id).JPanelPC,600,300);
+               metodos.generarVentana("",new Principal_Cliente(1,id).JPanelPC,700,350);
                metodos.cerrarVentana(JPanelRP);
            }
        });
+        generarPDFButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                generarReportesPDF();
+            }
+        });
 
     }
     public void agregarBotones(){
@@ -106,7 +119,7 @@ public class Reportes {
         }
     }
     public void llenarTablaFacturas() throws SQLException {
-            DefaultTableModel modelo = new DefaultTableModel();
+            modelo = new DefaultTableModel();
             modelo.addColumn("ID");
             modelo.addColumn("Fecha");
             modelo.addColumn("Nombre");

@@ -105,6 +105,10 @@ public class Pantalla_p {
 
         tabla_de_productos.setRowHeight(150);
         tabla_de_productos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tabla_de_productos.setColumnSelectionAllowed(false);
+        tabla_de_productos.setRowSelectionAllowed(false);
+        tabla_de_productos.setCellSelectionEnabled(true);    // Habilitar selección de celdas
+        tabla_de_productos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     private void realizarBusqueda() {

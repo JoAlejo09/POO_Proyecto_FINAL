@@ -24,23 +24,44 @@ public class Pantalla_p {
     private JTree categorias_de_productos;
     private JButton boton_de_busqueda;
     private JComboBox<String> buscar_segun;
+    private JButton agregarCarritoButton;
     Metodos metodos;
     MetodosBase met = new MetodosBase();
-    public Pantalla_p() {
+    public Pantalla_p(int id) {
         cargarDatosEnTabla("TODOS");  // Inicializar con todos los productos
         cargarCategoriasEnTree();
         inicializarComboBox();
+        validarCarrito(id);
 
         // Añadir listener al botón de búsqueda
         boton_de_busqueda.addActionListener(e -> realizarBusqueda());
         // Acciones de los botones
         boton_de_volver.addActionListener(e -> {
-            abrirFormularioRegistro();
+            abrirFormularioRegistro(id);
             metodos.cerrarVentana(panel1);  // Cerrar la ventana actual
         });
+        agregarCarritoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
+    private JPanel validarCierreVentana(int id){
+        if(id>0){
+            return  new Principal_Cliente(1,id).JPanelPC;
+        }else{
+            return new Principal_Invitado(0).JPanelP;
+        }
 
-
+    }
+    private void validarCarrito(int id){
+        if(id>0){
+            agregarCarritoButton.setVisible(true);
+        }else{
+            agregarCarritoButton.setVisible(false);
+        }
+    }
     private void inicializarComboBox() {
         buscar_segun.removeAllItems();
         buscar_segun.addItem("Nombre");
@@ -110,6 +131,12 @@ public class Pantalla_p {
 
         tabla_de_productos.setRowHeight(150);
         tabla_de_productos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        //VALIDACION QUE SE PUEDA SELECCIONAR UN SOLO ELEMENTO
+        tabla_de_productos.setColumnSelectionAllowed(false);
+        tabla_de_productos.setRowSelectionAllowed(false);
+        tabla_de_productos.setCellSelectionEnabled(true);
+        tabla_de_productos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     private void realizarBusqueda() {
@@ -210,10 +237,10 @@ public class Pantalla_p {
         });
     }
 
-   private void abrirFormularioRegistro() {
+   private void abrirFormularioRegistro(int id) {
        JFrame frame = new JFrame();
         metodos = new Metodos(frame);
-        metodos.generarVentana("Formulario de Registro",new Principal_Invitado(0).JPanelP,600,350);
+        metodos.generarVentana("",validarCierreVentana(id),600,350);
     }
     // Método para cerrar la ventana actual
 

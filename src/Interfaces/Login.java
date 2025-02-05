@@ -34,7 +34,8 @@ public class Login {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panel=new Registrarse(0).JPanelR;
-                met.generarVentana("",panel,500,300);
+                met.generarVentana("",panel,550,350);
+                met.cerrarVentana(JPanelL);
             }
         });
         tUsuario.addFocusListener(new FocusAdapter() {
