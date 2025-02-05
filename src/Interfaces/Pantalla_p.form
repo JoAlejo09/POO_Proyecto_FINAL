@@ -49,7 +49,9 @@
             <children>
               <component id="e4722" class="javax.swing.JTable" binding="tabla_de_productos">
                 <constraints/>
-                <properties/>
+                <properties>
+                  <enabled value="false"/>
+                </properties>
               </component>
             </children>
           </scrollpane>

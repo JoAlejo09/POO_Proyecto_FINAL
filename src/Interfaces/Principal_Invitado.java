@@ -43,6 +43,7 @@ public class Principal_Invitado {
             public void actionPerformed(ActionEvent e) {
                 panel = new Pantalla_p().panel1;
                 met.generarVentana("",panel,600,300);
+                met.cerrarVentana(JPanelP);
             }
         });
         //acciones de los botones

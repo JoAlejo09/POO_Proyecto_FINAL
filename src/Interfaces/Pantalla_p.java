@@ -1,5 +1,6 @@
 package Interfaces;
 
+import Clases.Metodos;
 import Clases.MetodosBase;
 
 import javax.swing.*;
@@ -23,6 +24,7 @@ public class Pantalla_p {
     private JTree categorias_de_productos;
     private JButton boton_de_busqueda;
     private JComboBox<String> buscar_segun;
+    Metodos metodos;
     MetodosBase met = new MetodosBase();
     public Pantalla_p() {
         cargarDatosEnTabla("TODOS");  // Inicializar con todos los productos
@@ -34,7 +36,7 @@ public class Pantalla_p {
         // Acciones de los botones
         boton_de_volver.addActionListener(e -> {
             abrirFormularioRegistro();
-            cerrarPantalla();  // Cerrar la ventana actual
+            metodos.cerrarVentana(panel1);  // Cerrar la ventana actual
         });
     }
 
@@ -209,20 +211,11 @@ public class Pantalla_p {
     }
 
    private void abrirFormularioRegistro() {
-        JFrame frame = new JFrame("Formulario de Registro");
-        frame.setContentPane(new Principal_Invitado(0).JPanelP);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setLocationRelativeTo(null);  // Centrar ventana
-        frame.setVisible(true);
+       JFrame frame = new JFrame();
+        metodos = new Metodos(frame);
+        metodos.generarVentana("Formulario de Registro",new Principal_Invitado(0).JPanelP,600,350);
     }
     // Método para cerrar la ventana actual
-    private void cerrarPantalla() {
-        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(panel1); // Obtener la ventana que contiene el JPanel
-        if (frame != null) {
-            frame.dispose(); // Cerrar la ventana
-        }
-    }
 
     static class ProductoCelda {
         private ImageIcon imagen;

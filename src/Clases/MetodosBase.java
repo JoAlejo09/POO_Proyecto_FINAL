@@ -114,14 +114,6 @@ public class MetodosBase {
         }
     }
     public boolean insertarProducto(String nombre, double precio,String marca,String descripcion,String categoria,int stock, byte[] imagen){
-        /*Id int AI PK
-        Nombre varchar(100)
-        Precio decimal(10,2)
-        Marca varchar(50)
-        Descripcion text
-        Categoria varchar(50)
-        Imagen blob
-        Stock int*/
         String sql = "INSERT INTO Productos(Nombre, Precio, Marca, Descripcion, Categoria, Stock, Imagen )VALUES(?,?,?,?,?,?,?)";
         boolean rt = false;
         try {
@@ -144,5 +136,36 @@ public class MetodosBase {
             throw new RuntimeException(e);
         }
         return rt;
+    }
+    public ResultSet consultarReportes(String opcion){
+        String sql="";
+        if(opcion.compareTo("Facturas")==0){
+            sql = "SELECT * FROM Facturas";
+        }else{
+            sql="SELECT * FROM Pagos";
+        }
+        try {
+            PreparedStatement pstmt = cn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rs;
+    }
+    public ResultSet consultarReportesClientes(String opcion,int id){
+        String sql="";
+        if(opcion.compareTo("Facturas")==0){
+            sql = "SELECT * FROM Facturas WHERE id_cliente = ?";
+        }else{
+            sql="SELECT * FROM Pagos WHERE id_cliente = ?";
+        }
+        try {
+            PreparedStatement pstmt = cn.prepareStatement(sql);
+            pstmt.setInt(1,id);
+            rs = pstmt.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rs;
     }
 }

@@ -11,7 +11,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 
-public class AgregarProducto extends Component {
+public class AgregarModificarProducto extends Component {
     private JTextField tNombreP;
     private JTextField tPrecioP;
     private JSpinner SStock;
@@ -29,7 +29,7 @@ public class AgregarProducto extends Component {
     MetodosBase base = new MetodosBase();
 
 
-    public AgregarProducto(){
+    public AgregarModificarProducto(int status){
         SStock.setModel(new SpinnerNumberModel(5,1,100,1));
         BCargarImagen.addActionListener(new ActionListener() {
             @Override
