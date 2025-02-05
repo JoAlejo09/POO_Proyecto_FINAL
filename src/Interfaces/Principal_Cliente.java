@@ -62,6 +62,13 @@ public class Principal_Cliente {
                 met.generarVentana("",panel,400,350);
             }
         });
+        mFacturas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panel = new Reportes(id).JPanelRP;
+                met.generarVentana("",panel,600,300);
+            }
+        });
     }
     public void modificarBoton(JButton boton){
         boton.setBorder(null); // Quita el borde
