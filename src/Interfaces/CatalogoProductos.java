@@ -15,7 +15,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pantalla_p {
+public class CatalogoProductos {
     public JPanel panel1;
     private JTextField ingreso_de_busqueda;
     private JButton boton_de_volver;
@@ -28,7 +28,7 @@ public class Pantalla_p {
     JFrame frame = new JFrame();
     Metodos metodos= new Metodos(frame);
     MetodosBase met = new MetodosBase();
-    public Pantalla_p(int estado, int id) {
+    public CatalogoProductos(int estado, int id) {
         cargarDatosEnTabla("TODOS");  // Inicializar con todos los productos
         cargarCategoriasEnTree();
         inicializarComboBox();

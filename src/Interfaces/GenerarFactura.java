@@ -50,7 +50,7 @@ public class GenerarFactura {
                         if(estado){
                             JOptionPane.showMessageDialog(null,"Se ha generado la factura","",1);
                             base.actualizarStockProductos();
-                            base.resetearTabla("Carrito_drop");
+                            base.resetearTabla("CARRITO_DROP");
                         }else{
                             JOptionPane.showMessageDialog(null,"Error al generar la factura","",0);
                         }

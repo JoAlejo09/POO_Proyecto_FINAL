@@ -35,7 +35,7 @@ public class Principal_Cliente {
         mCatalogo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panel = new Pantalla_p(1,id).panel1;
+                panel = new CatalogoProductos(1,id).panel1;
                 met.generarVentana("",panel,900,350);
                 met.cerrarVentana(JPanelPC);
             }
@@ -43,7 +43,7 @@ public class Principal_Cliente {
         cerrarSesionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                base.resetearTabla("Carrito_drop");
+                base.resetearTabla("CARRITO_DROP");
                 JOptionPane.showMessageDialog(null,"CERRANDO SESION.....","",1);
                 panel = new Principal_Invitado(0).JPanelP;
                 met.generarVentana("",panel,600,350);
@@ -53,7 +53,7 @@ public class Principal_Cliente {
         salirButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                base.resetearTabla("Carrito_drop");
+                base.resetearTabla("CARRITO_DROP");
                 JOptionPane.showMessageDialog(null,"GRACIAS POR USAR LA TIENDA EN LINEA","",1);
                 System.exit(0);
             }
@@ -62,7 +62,7 @@ public class Principal_Cliente {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null,"CERRANDO SESION.....","",1);
-                base.resetearTabla("Carrito_drop");
+                base.resetearTabla("CARRITO_DROP");
                 panel = new Login(1).JPanelL;
                 met.generarVentana("",panel,400,350);
                 met.cerrarVentana(JPanelPC);

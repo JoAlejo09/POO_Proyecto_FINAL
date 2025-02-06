@@ -76,7 +76,7 @@ public class Login {
                 int log = metodos.validarLogin(rol,tUsuario.getText(),new String(pPassword.getPassword()));
                 if (!rol.equals("Cliente") && log > 0) {  // Si no es "Cliente", es "Administrador"
                     JOptionPane.showMessageDialog(null, "Bienvenido Administrador", "", JOptionPane.INFORMATION_MESSAGE);
-                    panel = new Opciones_Admin().Pantalla_Admin;
+                    panel = new Principal_Administrador().JPanelAD;
                     met.generarVentana("", panel, 725, 350);
                     met.cerrarVentana(JPanelL);  // Cierra la ventana de login
                 }else if(rl==0 && log>0){

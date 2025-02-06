@@ -36,7 +36,7 @@ public class Carrito {
                 int confirmacion = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres eliminar este producto?",
                         "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
                 if (confirmacion == JOptionPane.YES_OPTION) {
-                    base.eliminarRegistro(id, "Carrito_drop");// Llamar metodo para eliminar el registro de la BD
+                    base.eliminarRegistro(id, "CARRITO_DROP");// Llamar metodo para eliminar el registro de la BD
                     ((DefaultTableModel) tCarrito.getModel()).removeRow(filaSeleccionada); // Eliminar la fila de la tabla
                     JOptionPane.showMessageDialog(null, "Producto eliminado correctamente.");
                     calcularTotal();
@@ -50,7 +50,7 @@ public class Carrito {
                 int confirmacion = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres vaciar todos los producto?",
                         "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
                 if (confirmacion == JOptionPane.YES_OPTION) {
-                    base.resetearTabla("Carrito_drop");
+                    base.resetearTabla("CARRITO_DROP");
                     DefaultTableModel modelo = (DefaultTableModel) tCarrito.getModel();
                     modelo.setRowCount(0);
                     calcularTotal();
