@@ -345,4 +345,39 @@ public class MetodosBase {
         }
         return rt;
     }
+    public ResultSet consultarTodosClientes() {
+        String query = "SELECT Id, NombreCompleto, CorreoElectronico, Contrasena, Cedula, Direccion FROM cliente";
+        try {
+            Statement stmt = cn.createStatement(); 
+            rs = stmt.executeQuery(query);  
+        } catch (SQLException e) {
+            throw new RuntimeException(e); 
+        }
+        return rs;  
+    }
+    public void eliminarCliente(int id) {
+        String sqlCheck = "SELECT COUNT(*) FROM Cliente WHERE Id = ?";
+        String sqlDelete = "DELETE FROM Cliente WHERE Id = ?";
+        PreparedStatement pstmtCheck = null;
+        PreparedStatement pstmtDelete = null;
+        try {
+            // Verificar si el ID existe en la base de datos
+            pstmtCheck = cn.prepareStatement(sqlCheck);
+            pstmtCheck.setInt(1, id);
+            ResultSet rsCheck = pstmtCheck.executeQuery();
+
+            if (rsCheck.next() && rsCheck.getInt(1) > 0) {
+                // El ID existe, proceder con la eliminación
+                pstmtDelete = cn.prepareStatement(sqlDelete);
+                pstmtDelete.setInt(1, id);
+                pstmtDelete.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Cliente eliminado correctamente.");
+            } else {
+                // El ID no existe
+                JOptionPane.showMessageDialog(null, "No existe un cliente con ese ID.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
