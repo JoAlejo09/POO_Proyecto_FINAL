@@ -7,6 +7,7 @@ package Clases;
 import javax.swing.*;
 import java.io.File;
 import java.sql.*;
+import java.time.LocalDateTime;
 
 public class MetodosBase {
     //Metodo especificado para agregar conexion a base de datos y metodos sobre la base de datos
@@ -239,5 +240,62 @@ public class MetodosBase {
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
+    }
+
+    public ResultSet consultarDatosCliente(int id){
+        String sql = "SELECT NombreCompleto, Cedula FROM CLIENTE WHERE Id = ?";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = cn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            rs = pstmt.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rs;
+    }
+    public ResultSet consultarNroFactura(){
+        String sql = "SELECT MAX(Id) AS UltimoId FROM Facturas";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = cn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rs;
+
+    }
+    public boolean generarFactura(String nombre,double valor,String estado, int id_cliente)throws SQLException{
+        boolean rt=false;
+        String sql = "INSERT INTO Facturas(Fecha, Nombre, Valor, Estado, Id_cliente) VALUES (?,?,?,?,?)";
+        LocalDateTime now = LocalDateTime.now();
+        Timestamp tiempo = Timestamp.valueOf(now);
+
+        PreparedStatement pstmt = cn.prepareStatement(sql);
+        pstmt.setTimestamp(1,tiempo);
+        pstmt.setString(2,nombre);
+        pstmt.setDouble(3,valor);
+        pstmt.setString(4,estado);
+        pstmt.setInt(5,id_cliente);
+        int filasInsertadas = pstmt.executeUpdate();
+        if (filasInsertadas > 0) {
+            rt = true;
+        }
+        return rt;
+    }
+    public boolean actualizarStockProductos(){
+        boolean rt = false;
+        String sql = "UPDATE PRODUCTOS p JOIN CARRITO_DROP c ON p.Id = c.Id_Producto SET p.Stock = GREATEST(p.Stock - c.Cantidad, 0);";
+        try {
+            PreparedStatement pstmt = cn.prepareStatement(sql);
+            int filasAfectadas = pstmt.executeUpdate();
+            if (filasAfectadas > 0) {
+                rt = true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rt;
     }
 }

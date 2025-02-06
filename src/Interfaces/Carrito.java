@@ -65,6 +65,17 @@ public class Carrito {
             }
         });
 
+        realizarLaCompraButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double total = calcularTotal();
+                try {
+                    metodos.generarVentana("",new GenerarFactura(id,total).JPanelGF,600,350);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
     }
     public void llenarTabla(ResultSet rs) throws SQLException {
         modelo = new DefaultTableModel();
@@ -90,7 +101,7 @@ public class Carrito {
         tCarrito.getColumnModel().getColumn(0).setMaxWidth(0);
         tCarrito.getColumnModel().getColumn(0).setWidth(0);
     }
-    public void calcularTotal() {
+    public double calcularTotal() {
         double total = 0.0;
         if(!(tCarrito.getRowCount() == 0)){
             for (int i = 0; i < tCarrito.getRowCount(); i++) {
@@ -99,6 +110,7 @@ public class Carrito {
             }
         }
         LTotal.setText("TOTAL FACTURA: $"+total);
+        return total;
     }
     public int obtenerSeleccionado(){
         int id_carrito=-1;
