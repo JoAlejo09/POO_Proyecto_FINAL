@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class Principal_Cliente {
     private JMenuItem mCatalogo;
@@ -69,7 +70,19 @@ public class Principal_Cliente {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panel = new Reportes(id).JPanelRP;
-                met.generarVentana("",panel,600,300);
+                met.generarVentana("",panel,600,350);
+                met.cerrarVentana(JPanelPC);
+            }
+        });
+        mCarrito.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    panel = new Carrito(id).JPanelCR;
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                met.generarVentana("",panel,600,350);
                 met.cerrarVentana(JPanelPC);
             }
         });

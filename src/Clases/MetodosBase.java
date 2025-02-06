@@ -88,42 +88,45 @@ public class MetodosBase {
         }
         return rs;
     }
-    public ResultSet realizarBusqueda(String criterioBusqueda,String valorBusqueda){
+
+    public ResultSet realizarBusqueda(String criterioBusqueda, String valorBusqueda) {
         String query = "SELECT Id, Nombre, Precio, Marca, Descripcion, Categoria, Imagen, Stock FROM PRODUCTOS WHERE " + criterioBusqueda + " LIKE '%" + valorBusqueda + "%'";
-        try{
+        try {
             Statement stmt = cn.createStatement();
             rs = stmt.executeQuery(query);
-        }catch (SQLException e){
+        } catch (SQLException e) {
 
         }
         return rs;
     }
-    public String hallarNombre(int id){
+
+    public String hallarNombre(int id) {
         String query = "SELECT NombreCompleto FROM Cliente WHERE id = ?";
-        try{
+        try {
             PreparedStatement pstmt = cn.prepareStatement(query);
             pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
-            if(rs.next()) {
+            if (rs.next()) {
                 return rs.getString(1);
-            }else{
+            } else {
                 return null;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public boolean insertarProducto(String nombre, double precio,String marca,String descripcion,String categoria,int stock, byte[] imagen){
+
+    public boolean insertarProducto(String nombre, double precio, String marca, String descripcion, String categoria, int stock, byte[] imagen) {
         String sql = "INSERT INTO Productos(Nombre, Precio, Marca, Descripcion, Categoria, Stock, Imagen )VALUES(?,?,?,?,?,?,?)";
         boolean rt = false;
         try {
             PreparedStatement pstmt = cn.prepareStatement(sql);
-            pstmt.setString(1,nombre);
-            pstmt.setDouble(2,precio);
-            pstmt.setString(3,marca);
-            pstmt.setString(4,descripcion);
-            pstmt.setString(5,categoria);
-            pstmt.setInt(6,stock);
+            pstmt.setString(1, nombre);
+            pstmt.setDouble(2, precio);
+            pstmt.setString(3, marca);
+            pstmt.setString(4, descripcion);
+            pstmt.setString(5, categoria);
+            pstmt.setInt(6, stock);
             if (imagen != null) {
                 pstmt.setBytes(7, imagen);
             }
@@ -137,12 +140,13 @@ public class MetodosBase {
         }
         return rt;
     }
-    public ResultSet consultarReportes(String opcion){
-        String sql="";
-        if(opcion.compareTo("Facturas")==0){
+
+    public ResultSet consultarReportes(String opcion) {
+        String sql = "";
+        if (opcion.compareTo("Facturas") == 0) {
             sql = "SELECT * FROM Facturas";
-        }else{
-            sql="SELECT * FROM Pagos";
+        } else {
+            sql = "SELECT * FROM Pagos";
         }
         try {
             PreparedStatement pstmt = cn.prepareStatement(sql);
@@ -152,23 +156,25 @@ public class MetodosBase {
         }
         return rs;
     }
-    public ResultSet consultarReportesClientes(String opcion,int id){
-        String sql="";
-        if(opcion.compareTo("Facturas")==0){
+
+    public ResultSet consultarReportesClientes(String opcion, int id) {
+        String sql = "";
+        if (opcion.compareTo("Facturas") == 0) {
             sql = "SELECT * FROM Facturas WHERE id_cliente = ?";
-        }else{
-            sql="SELECT * FROM Pagos WHERE id_cliente = ?";
+        } else {
+            sql = "SELECT * FROM Pagos WHERE id_cliente = ?";
         }
         try {
             PreparedStatement pstmt = cn.prepareStatement(sql);
-            pstmt.setInt(1,id);
+            pstmt.setInt(1, id);
             rs = pstmt.executeQuery();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return rs;
     }
-    public ResultSet obtenerProductoCarrito(String producto){
+
+    public ResultSet obtenerProductoCarrito(String producto) {
         String sql = "SELECT Id, Nombre, Precio, Marca, Categoria, Imagen, Stock FROM Productos WHERE Nombre = ?";
         try {
             PreparedStatement pstmt = cn.prepareStatement(sql);
@@ -179,14 +185,15 @@ public class MetodosBase {
         }
         return rs;
     }
-    public boolean agregarCarrito(int id_producto, int cantidad){
-        String sql="INSERT INTO Carrito_drop( Id_producto, Cantidad) VALUES(?,?)";
+
+    public boolean agregarCarrito(int id_producto, int cantidad) {
+        String sql = "INSERT INTO Carrito_drop( Id_producto, Cantidad) VALUES(?,?)";
         boolean rt = false;
         PreparedStatement pstmt = null;
         try {
             pstmt = cn.prepareStatement(sql);
-            pstmt.setInt(1,id_producto);
-            pstmt.setInt(2,cantidad);
+            pstmt.setInt(1, id_producto);
+            pstmt.setInt(2, cantidad);
             int filasInsertadas = pstmt.executeUpdate();
             if (filasInsertadas > 0) {
                 rt = true;
@@ -197,4 +204,40 @@ public class MetodosBase {
         return rt;
     }
 
+    public ResultSet mostrarCarrito() {
+        String sql = "SELECT c.Id, p.Nombre, c.Cantidad, p.Precio, (c.Cantidad * p.Precio) AS Total " +
+                "FROM Carrito_drop c " +
+                "JOIN Productos p ON c.Id_Producto = p.Id";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = cn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return rs;
+    }
+
+    public void eliminarRegistro(int id, String tabla) {
+        String sql = "DELETE FROM " + tabla + " WHERE Id = ?";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = cn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void resetearTabla(String tabla) {
+        String sql = "TRUNCATE TABLE "+tabla;
+        try {
+            PreparedStatement stmt = cn.prepareStatement(sql);
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Carrito vaciado y reiniciado correctamente.");
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 }
