@@ -32,6 +32,7 @@ public class Principal_Cliente {
         modificarBoton(cambiarUsuarioButton);
         modificarBoton(cerrarSesionButton);
         modificarBoton(salirButton);
+        //INICIAR ACCIONES BARRA DE MENU
         mCatalogo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -40,6 +41,27 @@ public class Principal_Cliente {
                 met.cerrarVentana(JPanelPC);
             }
         });
+        mFacturas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panel = new Reportes(id).JPanelRP;
+                met.generarVentana("",panel,600,350);
+                met.cerrarVentana(JPanelPC);
+            }
+        });
+        mCarrito.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    panel = new Carrito(id).JPanelCR;
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                met.generarVentana("",panel,600,350);
+                met.cerrarVentana(JPanelPC);
+            }
+        });
+        //ACCIONES BOTONES ADICIONALES
         cerrarSesionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -68,26 +90,8 @@ public class Principal_Cliente {
                 met.cerrarVentana(JPanelPC);
             }
         });
-        mFacturas.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panel = new Reportes(id).JPanelRP;
-                met.generarVentana("",panel,600,350);
-                met.cerrarVentana(JPanelPC);
-            }
-        });
-        mCarrito.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    panel = new Carrito(id).JPanelCR;
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-                met.generarVentana("",panel,600,350);
-                met.cerrarVentana(JPanelPC);
-            }
-        });
+
+
     }
     public void modificarBoton(JButton boton){
         boton.setBorder(null); // Quita el borde
