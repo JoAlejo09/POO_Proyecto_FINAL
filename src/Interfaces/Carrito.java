@@ -110,6 +110,9 @@ public class Carrito {
             }
         }
         LTotal.setText("TOTAL FACTURA: $"+total);
+        if(total==0.0){
+            realizarLaCompraButton.setEnabled(false);
+        }
         return total;
     }
     public int obtenerSeleccionado(){

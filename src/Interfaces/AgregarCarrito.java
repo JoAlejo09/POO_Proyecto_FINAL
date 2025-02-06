@@ -69,5 +69,11 @@ public class AgregarCarrito {
                 }
             }
         });
+        cancelarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                met.cerrarVentana(JPanelAC);
+            }
+        });
     }
 }

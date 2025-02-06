@@ -18,6 +18,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Reportes {
     private JTable taReportes;
@@ -66,7 +70,7 @@ public class Reportes {
         generarPDFButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                generarReportesPDF();
+                generarReportesPDF(0);
             }
         });
     }
@@ -102,7 +106,7 @@ public class Reportes {
         generarPDFButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                generarReportesPDF();
+                generarReportesPDF(id);
             }
         });
 
@@ -165,20 +169,28 @@ public class Reportes {
         // Asignar el modelo a la JTable
         taReportes.setModel(modelo);
     }
-    public void generarReportesPDF(){
+    public void generarReportesPDF(int id){
+        String encabezado="";//VALIDACION DE QUIEN ENVIA REPORTE
+        if(id == 0){
+            encabezado = "REPORTE PARA ADMINSTRADOR.";
+        }else if(id>0){
+            encabezado = "REPORTE DE CLIENTE: "+base.hallarNombre(id)+ ".";
+        }
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String fechaStr = now.format(formatter);
+        encabezado+="\nFecha: "+fechaStr;
+
         //ELECCION DE DONDE ALMACENAR
         JFileChooser filechooser = new JFileChooser();
         filechooser.setDialogTitle("GUARDAR PDF");
         filechooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         // Filtro para archivos .pdf
         filechooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos PDF (*.pdf)", "pdf"));
-
         int seleccion = filechooser.showSaveDialog(null);
-
         if (seleccion == JFileChooser.APPROVE_OPTION) {
             File archivo = filechooser.getSelectedFile();
             String rutaArchivo = archivo.getAbsolutePath();
-
             if(!rutaArchivo.toLowerCase().endsWith(".pdf"))
             {
                 rutaArchivo+= ".pdf";
@@ -188,7 +200,9 @@ public class Reportes {
                 PdfWriter.getInstance(documento, new FileOutputStream(rutaArchivo));
                 documento.open();
                 documento.add(new Paragraph("REPORTE DE DATOS"));
-                documento.add(new Paragraph("  "));
+                documento.add(new Paragraph("\n"));
+                documento.add(new Paragraph(encabezado));
+                documento.add(new Paragraph("\n"));
                 PdfPTable tablaPDF = new PdfPTable(taReportes.getColumnCount());
 
                 TableModel modelo = taReportes.getModel();

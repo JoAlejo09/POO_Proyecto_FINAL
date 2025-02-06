@@ -18,16 +18,15 @@ public class Principal_Cliente {
     private JButton cerrarSesionButton;
     private JButton cambiarUsuarioButton;
     private JButton salirButton;
-    private JLabel LIcono;
     private JLabel LCliente;
     private JLabel LLogo;
     JFrame frame = new JFrame();
     Metodos met = new Metodos(frame);
-    MetodosBase bas = new MetodosBase();
+    MetodosBase base = new MetodosBase();
     JPanel panel;
 
     public Principal_Cliente(int estado,int id){
-        String nombre = bas.hallarNombre(id);
+        String nombre = base.hallarNombre(id);
         LCliente.setText("Usuario: "+nombre);
         anadirIcono();
         modificarBoton(cambiarUsuarioButton);
@@ -37,14 +36,15 @@ public class Principal_Cliente {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panel = new Pantalla_p(1,id).panel1;
-                met.generarVentana("",panel,600,300);
+                met.generarVentana("",panel,900,350);
                 met.cerrarVentana(JPanelPC);
             }
         });
         cerrarSesionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,"CERRANDO SESION.....","",0);
+                base.resetearTabla("Carrito_drop");
+                JOptionPane.showMessageDialog(null,"CERRANDO SESION.....","",1);
                 panel = new Principal_Invitado(0).JPanelP;
                 met.generarVentana("",panel,600,350);
                 met.cerrarVentana(JPanelPC);
@@ -53,14 +53,16 @@ public class Principal_Cliente {
         salirButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,"GRACIAS POR USAR LA TIENDA EN LINEA","",0);
+                base.resetearTabla("Carrito_drop");
+                JOptionPane.showMessageDialog(null,"GRACIAS POR USAR LA TIENDA EN LINEA","",1);
                 System.exit(0);
             }
         });
         cambiarUsuarioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,"CERRANDO SESION.....","",0);
+                JOptionPane.showMessageDialog(null,"CERRANDO SESION.....","",1);
+                base.resetearTabla("Carrito_drop");
                 panel = new Login(1).JPanelL;
                 met.generarVentana("",panel,400,350);
                 met.cerrarVentana(JPanelPC);

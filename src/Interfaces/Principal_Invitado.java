@@ -3,6 +3,7 @@
 
 package Interfaces;
 import Clases.Metodos;
+import Clases.MetodosBase;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +34,7 @@ public class Principal_Invitado {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panel = new Pantalla_p(0,0).panel1;
-                met.generarVentana("",panel,800,350);
+                met.generarVentana("",panel,900,350);
                 met.cerrarVentana(JPanelP);
             }
         });
@@ -48,7 +49,8 @@ public class Principal_Invitado {
         //acciones de los botones
         salirButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 System.exit(0);
             }
         });

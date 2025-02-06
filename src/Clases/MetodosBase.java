@@ -75,7 +75,21 @@ public class MetodosBase {
         }
         return rt;
     }
-
+    public ResultSet consultarProductosId(int id) {
+        String query = "SELECT Nombre, Precio, Marca, Descripcion, Categoria, Imagen, Stock FROM PRODUCTOS WHERE Id = ?";
+        ResultSet rs = null;
+        try {
+            if (cn == null) {
+                throw new SQLException("Error: La conexión a la base de datos es nula.");
+            }
+            PreparedStatement stmt = cn.prepareStatement(query);
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery(); // 🔹 CORRECCIÓN: No pasar 'query' aquí
+        } catch (SQLException e) {
+            e.printStackTrace(); // 🔹 Ahora imprimimos el error para depuración
+        }
+        return rs;
+    }
     public ResultSet consultarProductos(String categoria) {
         String query = "SELECT Id, Nombre, Precio, Marca, Descripcion, Categoria, Imagen, Stock FROM PRODUCTOS";
         if (!categoria.equals("TODOS")) {
@@ -141,7 +155,31 @@ public class MetodosBase {
         }
         return rt;
     }
-
+    public boolean actualizarProducto(int id, String nombre,double precio,String marca,String descripcion,String categoria,int stock, byte[] imagen){
+        String sql = "UPDATE PRODUCTOS SET Nombre = ?, Precio = ?, Marca = ?, Descripcion = ?, Categoria = ?, Stock = ?, Imagen = ? WHERE Id = ?";
+        boolean rt = false;
+        try {
+            PreparedStatement pstmt = cn.prepareStatement(sql);
+            pstmt.setString(1,nombre);
+            pstmt.setDouble(2,precio);
+            pstmt.setString(3,marca);
+            pstmt.setString(4,descripcion);
+            pstmt.setString(5,categoria);
+            pstmt.setInt(6,stock);
+            if (imagen != null) {
+                pstmt.setBytes(7, imagen);
+            }
+            pstmt.setInt(8, id);
+            int filasAfectadas = pstmt.executeUpdate();
+            if (filasAfectadas > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public ResultSet consultarReportes(String opcion) {
         String sql = "";
         if (opcion.compareTo("Facturas") == 0) {
