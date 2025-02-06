@@ -109,6 +109,8 @@ public class AgregarModificarProducto extends Component {
             throw new RuntimeException(e);
         }
     }
+
+    //FUNCIONES PARA VALIDACION Y EJECUCION
     public boolean validarDatos(){
         boolean status = true;
         if (tNombreP.getText().isEmpty()){

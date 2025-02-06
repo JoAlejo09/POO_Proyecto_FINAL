@@ -83,9 +83,9 @@ public class Registrarse {
         bRegistrarse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean rs = bas.insertarCliente(tNombre.getText(),tApellido.getText(),tCorreo.getText(), new String(pContrasena.getPassword()),tCedula.getText(),
+                boolean res = bas.insertarCliente(tNombre.getText(),tApellido.getText(),tCorreo.getText(), new String(pContrasena.getPassword()),tCedula.getText(),
                         tDireccion.getText());
-                if(rs){
+                if(res){
                     JOptionPane.showMessageDialog(null,"USUARIO INGRESADO CORRECTAMENTE","",1);
                     panel = new Login(0).JPanelL;
                     met.generarVentana("",panel,400,350);

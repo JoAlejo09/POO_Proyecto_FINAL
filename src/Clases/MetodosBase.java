@@ -10,24 +10,36 @@ import java.sql.*;
 import java.time.LocalDateTime;
 
 public class MetodosBase {
-    //Metodo especificado para agregar conexion a base de datos y metodos sobre la base de datos
-   /* private static final String HOST="bdbsjb7v8o8wa0pot4lt-mysql.services.clever-cloud.com";
+//PRUEBA DE OTRA BASE DE DATOS
+    private String HOST="bx7mgr834vhwqndq7pjj-mysql.services.clever-cloud.com";
+    private final String DB="bx7mgr834vhwqndq7pjj";
+    private final String USER="uqtw41jnukntizp7";
+    private final String PORT="3306";
+    private final String PASSWORD="aPYwHRDWLool6PYHCY7C";
+
+    private final String URL = "jdbc:mysql://"+HOST+":"+PORT+"/"+DB; //DIRECCIONAMIENTO DE LA BASE DE DATOS PARA CONEXION EN LA NUBE*/
+    /*private static final String HOST="bdbsjb7v8o8wa0pot4lt-mysql.services.clever-cloud.com";
     private static final String DB="bdbsjb7v8o8wa0pot4lt";
     private static final String USER="uspitlplqxwpi1ft";
     private static final String PORT="3306";
-    private static final String PASSWORD="vDVAQEeEPO9pvXHzs0ih";
-    private static final String URL = "jdbc:mysql://"+HOST+":"+PORT+"/"+DB; //DIRECCIONAMIENTO DE LA BASE DE DATOS PARA CONEXION EN LA NUBE
-*/
+    private static final String PASSWORD="vDVAQEeEPO9pvXHzs0ih";*/
 
-    private String URL = "jdbc:mysql://localhost:3306/tienda_db";
+    //Metodo especificado para agregar conexion a base de datos y metodos sobre la base de datos
+
+/*    private String URL = "jdbc:mysql://localhost:3306/tienda_db";
     private String USER = "root";
-    private String PASSWORD = "root";
+    private String PASSWORD = "root";*/
     Connection cn;
     ResultSet rs;
 
     public MetodosBase() { //Inicializacion de la conexion
         try {
             cn = DriverManager.getConnection(URL, USER, PASSWORD);
+            if(cn==null){
+                System.out.println("NO SE HA CONECTADO A LA BASE");
+            }else{
+                System.out.println("CONECTADO A LA BASE");
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -37,9 +49,9 @@ public class MetodosBase {
         String sql = "";
         int val = rol.compareTo("Cliente");
         if (val < 0 || val > 0) {
-            sql = "SELECT id FROM Administrador WHERE usuario = ? AND contrasena = ?";
+            sql = "SELECT Id FROM ADMINISTRADOR WHERE Usuario = ? AND Contrasena = ?";
         } else {
-            sql = "SELECT id FROM Cliente WHERE CorreoElectronico = ? AND Contrasena = ?";
+            sql = "SELECT Id FROM CLIENTE WHERE CorreoElectronico = ? AND Contrasena = ?";
         }
         try {
             PreparedStatement stmt = cn.prepareStatement(sql);
@@ -50,6 +62,7 @@ public class MetodosBase {
                 return rs.getInt(1);  // Retorna el número de usuarios que coinciden
             } else {
                 return 0;
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -57,7 +70,7 @@ public class MetodosBase {
     }
 
     public boolean insertarCliente(String nombre, String apellido, String correo, String contrasena, String cedula, String direccion) {
-        String sql = "INSERT INTO Cliente (NombreCompleto, CorreoElectronico, Contrasena, Cedula, Direccion) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO CLIENTE (NombreCompleto, CorreoElectronico, Contrasena, Cedula, Direccion) VALUES (?,?,?,?,?)";
         boolean rt = false;
         try {
             PreparedStatement pstmt = cn.prepareStatement(sql);
@@ -71,7 +84,7 @@ public class MetodosBase {
                 rt = true;
             }
         } catch (SQLException e) {
-
+            System.out.println("ERROR");
         }
         return rt;
     }
@@ -103,7 +116,6 @@ public class MetodosBase {
         }
         return rs;
     }
-
     public ResultSet realizarBusqueda(String criterioBusqueda, String valorBusqueda) {
         String query = "SELECT Id, Nombre, Precio, Marca, Descripcion, Categoria, Imagen, Stock FROM PRODUCTOS WHERE " + criterioBusqueda + " LIKE '%" + valorBusqueda + "%'";
         try {
@@ -114,9 +126,8 @@ public class MetodosBase {
         }
         return rs;
     }
-
     public String hallarNombre(int id) {
-        String query = "SELECT NombreCompleto FROM Cliente WHERE id = ?";
+        String query = "SELECT NombreCompleto FROM CLIENTE WHERE Id = ?";
         try {
             PreparedStatement pstmt = cn.prepareStatement(query);
             pstmt.setInt(1, id);
@@ -130,9 +141,8 @@ public class MetodosBase {
             throw new RuntimeException(e);
         }
     }
-
     public boolean insertarProducto(String nombre, double precio, String marca, String descripcion, String categoria, int stock, byte[] imagen) {
-        String sql = "INSERT INTO Productos(Nombre, Precio, Marca, Descripcion, Categoria, Stock, Imagen )VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO PRODUCTOS(Nombre, Precio, Marca, Descripcion, Categoria, Stock, Imagen )VALUES(?,?,?,?,?,?,?)";
         boolean rt = false;
         try {
             PreparedStatement pstmt = cn.prepareStatement(sql);
@@ -183,9 +193,9 @@ public class MetodosBase {
     public ResultSet consultarReportes(String opcion) {
         String sql = "";
         if (opcion.compareTo("Facturas") == 0) {
-            sql = "SELECT * FROM Facturas";
+            sql = "SELECT * FROM FACTURAS";
         } else {
-            sql = "SELECT * FROM Pagos";
+            sql = "SELECT * FROM PAGOS";
         }
         try {
             PreparedStatement pstmt = cn.prepareStatement(sql);
@@ -195,13 +205,12 @@ public class MetodosBase {
         }
         return rs;
     }
-
     public ResultSet consultarReportesClientes(String opcion, int id) {
         String sql = "";
         if (opcion.compareTo("Facturas") == 0) {
-            sql = "SELECT * FROM Facturas WHERE id_cliente = ?";
+            sql = "SELECT * FROM FACTURAS WHERE Id_cliente = ?";
         } else {
-            sql = "SELECT * FROM Pagos WHERE id_cliente = ?";
+            sql = "SELECT * FROM PAGOS WHERE Id_cliente = ?";
         }
         try {
             PreparedStatement pstmt = cn.prepareStatement(sql);
@@ -212,9 +221,8 @@ public class MetodosBase {
         }
         return rs;
     }
-
     public ResultSet obtenerProductoCarrito(String producto) {
-        String sql = "SELECT Id, Nombre, Precio, Marca, Categoria, Imagen, Stock FROM Productos WHERE Nombre = ?";
+        String sql = "SELECT Id, Nombre, Precio, Marca, Categoria, Imagen, Stock FROM PRODUCTOS WHERE Nombre = ?";
         try {
             PreparedStatement pstmt = cn.prepareStatement(sql);
             pstmt.setString(1, producto);
@@ -224,9 +232,8 @@ public class MetodosBase {
         }
         return rs;
     }
-
     public boolean agregarCarrito(int id_producto, int cantidad) {
-        String sql = "INSERT INTO Carrito_drop( Id_producto, Cantidad) VALUES(?,?)";
+        String sql = "INSERT INTO CARRITO_DROP(Id_producto, Cantidad) VALUES(?,?)";
         boolean rt = false;
         PreparedStatement pstmt = null;
         try {
@@ -245,8 +252,8 @@ public class MetodosBase {
 
     public ResultSet mostrarCarrito() {
         String sql = "SELECT c.Id, p.Nombre, c.Cantidad, p.Precio, (c.Cantidad * p.Precio) AS Total " +
-                "FROM Carrito_drop c " +
-                "JOIN Productos p ON c.Id_Producto = p.Id";
+                "FROM CARRITO_DROP c " +
+                "JOIN PRODUCTOS p ON c.Id_Producto = p.Id";
         PreparedStatement pstmt = null;
         try {
             pstmt = cn.prepareStatement(sql);
@@ -293,7 +300,7 @@ public class MetodosBase {
         return rs;
     }
     public ResultSet consultarNroFactura(){
-        String sql = "SELECT MAX(Id) AS UltimoId FROM Facturas";
+        String sql = "SELECT MAX(Id) AS UltimoId FROM FACTURAS";
         PreparedStatement pstmt = null;
         try {
             pstmt = cn.prepareStatement(sql);
@@ -306,7 +313,7 @@ public class MetodosBase {
     }
     public boolean generarFactura(String nombre,double valor,String estado, int id_cliente)throws SQLException{
         boolean rt=false;
-        String sql = "INSERT INTO Facturas(Fecha, Nombre, Valor, Estado, Id_cliente) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO FACTURAS(Fecha, Nombre, Valor, Estado, Id_cliente) VALUES (?,?,?,?,?)";
         LocalDateTime now = LocalDateTime.now();
         Timestamp tiempo = Timestamp.valueOf(now);
 
