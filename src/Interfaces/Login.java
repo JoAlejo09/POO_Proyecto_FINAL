@@ -74,10 +74,11 @@ public class Login {
                 System.out.println(rol);
                 int rl = rol.compareTo("Cliente");
                 int log = metodos.validarLogin(rol,tUsuario.getText(),new String(pPassword.getPassword()));
-                if((rl>0||rl<0)&log>0) {
-                    JOptionPane.showMessageDialog(null,"Bienvenido Administrador","",1);
-                    //Se envia a ventana Administrador
-                    est=1;
+                if (!rol.equals("Cliente") && log > 0) {  // Si no es "Cliente", es "Administrador"
+                    JOptionPane.showMessageDialog(null, "Bienvenido Administrador", "", JOptionPane.INFORMATION_MESSAGE);
+                    panel = new Opciones_Admin().Pantalla_Admin;
+                    met.generarVentana("", panel, 725, 350);
+                    met.cerrarVentana(JPanelL);  // Cierra la ventana de login
                 }else if(rl==0 && log>0){
                     JOptionPane.showMessageDialog(null,"Bienvenido Cliente","",1);
                     est=1;
