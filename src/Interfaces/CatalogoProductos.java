@@ -32,11 +32,10 @@ public class CatalogoProductos {
         cargarDatosEnTabla("TODOS");  // Inicializar con todos los productos
         cargarCategoriasEnTree();
         inicializarComboBox();
-        validarBotones(id,estado);
+        validarBotones(id,estado); //Valida que botones debe aparecer si es invitado,cliente o administrador
 
-        // Añadir listener al botón de búsqueda
-        boton_de_busqueda.addActionListener(e -> realizarBusqueda());
         // Acciones de los botones
+        boton_de_busqueda.addActionListener(e -> realizarBusqueda());
         boton_de_volver.addActionListener(e -> {
             abrirFormularioRegistro(id,estado);
             metodos.cerrarVentana(panel1);  // Cerrar la ventana actual
@@ -52,6 +51,26 @@ public class CatalogoProductos {
                 }
             }
         });
+        editarProductoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String producto = obtenerProducto();
+                int id=0;
+                try {
+                    id = met.consultarProductoEditar(producto);
+                } catch (SQLException ex)
+                {
+                    throw new RuntimeException(ex);
+                }
+                if(id==0){
+                    JOptionPane.showMessageDialog(null,"NO SE HA SELECCIONADO NINGUN PRODUCTO PARA EDITAR","",1);
+                }else{
+                    metodos.generarVentana("",new AgregarModificarProducto(id).JPanelAP,700,450);
+
+                }
+
+            }
+        });
     }
     private JPanel validarCierreVentana(int id, int est){
         JPanel panel = null;
@@ -60,7 +79,9 @@ public class CatalogoProductos {
         }else if(est==0){
             panel = new Principal_Invitado(0).JPanelP;
         }else if(est==2){
-            //panel = new Principal_Administrador(2).JPanelAD;
+            panel = new Principal_Administrador().JPanelAD;
+        }else if(est==3){
+            panel=panel = new Principal_Administrador().JPanelAD;
         }else{
             panel = null;
         }
@@ -74,9 +95,11 @@ public class CatalogoProductos {
             agregarCarritoButton.setVisible(true);
             editarProductoButton.setVisible(false);
         }else if(est==2){
+            agregarCarritoButton.setVisible(false);
             editarProductoButton.setVisible(true);
         }else{
-
+            agregarCarritoButton.setVisible(false);
+            editarProductoButton.setVisible(false);
         }
     }
     private void inicializarComboBox() {

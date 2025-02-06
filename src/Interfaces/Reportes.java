@@ -63,7 +63,7 @@ public class Reportes {
         volverButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //metodos.generarVentana("",new Administrador().JPanelAD,300,600);
+                metodos.generarVentana("",new Principal_Administrador().JPanelAD,725,450);
                 metodos.cerrarVentana(JPanelRP);
             }
         });

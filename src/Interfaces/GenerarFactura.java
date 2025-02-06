@@ -60,6 +60,28 @@ public class GenerarFactura {
                 }
             }
         });
+        pagarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean estado;
+                int confirmacion = JOptionPane.showConfirmDialog(null, "¿Desea generar la factura y pagar el valor?","Confirmar Pago", JOptionPane.YES_NO_OPTION);
+                try {
+                    estado = base.generarFactura(tNombre.getText(),Double.parseDouble(tValor.getText()),"Pagado",id_cliente);
+                    if(estado){
+                        base.actualizarStockProductos();
+                        base.resetearTabla("CARRITO_DROP");
+                        int id_factura = base.obtenerIdFactura(id_cliente);
+                        if(id_factura>0){
+                            base.generarPago(id_factura,id_cliente,Double.parseDouble(tValor.getText()),tNombre.getText());
+                            metodos.generarVentana("",new Principal_Cliente(1,id_cliente).JPanelPC,725,450);
+                            metodos.cerrarVentana(JPanelGF);
+                        }
+                    }
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
     }
     public void llenarCamposFactura() throws SQLException {
         int nro = 0;

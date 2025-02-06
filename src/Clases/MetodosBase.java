@@ -251,7 +251,22 @@ public class MetodosBase {
         }
         return rt;
     }
-
+    public int consultarProductoEditar(String producto)throws SQLException{
+        String sql = "SELECT Id FROM PRODUCTOS WHERE Nombre = ?";
+        try {
+            PreparedStatement pstmt = cn.prepareStatement(sql);
+            pstmt.setString(1, producto);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("Id");
+            }
+            else{
+                return 0;
+            }
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public ResultSet mostrarCarrito() {
         String sql = "SELECT c.Id, p.Nombre, c.Cantidad, p.Precio, (c.Cantidad * p.Precio) AS Total " +
                 "FROM CARRITO_DROP c " +
@@ -331,7 +346,44 @@ public class MetodosBase {
         }
         return rt;
     }
-    public boolean actualizarStockProductos(){
+    public int obtenerIdFactura(int id_cliente) {
+        String sql = "SELECT Id FROM FACTURAS WHERE Id_cliente = ? ORDER BY Id DESC LIMIT 1;";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = cn.prepareStatement(sql);
+            pstmt.setInt(1,id_cliente);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                return rs.getInt("Id");
+            }else{
+                return 0;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void generarPago(int id_factura, int id_cliente, double valor,String nombre){
+        String sql = "INSERT INTO PAGOS (Fecha, Nombre, Valor, Id_cliente, Id_factura) VALUES (NOW(), ?, ?, ?, ?)";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = cn.prepareStatement(sql);
+            pstmt.setString(1,nombre);
+            pstmt.setDouble(2,valor);
+            pstmt.setInt(3,id_cliente);
+            pstmt.setInt(4,id_factura);
+            int filas_insertadas = pstmt.executeUpdate();
+            if(filas_insertadas>0){
+                JOptionPane.showMessageDialog(null,"FACTURA Y PAGOS REGISTRADOS CON EXITO","",1);
+            }else{
+                JOptionPane.showMessageDialog(null,"NO SE HA REGISTRADO EL PAGO","",0);
+            }
+        }catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        public boolean actualizarStockProductos(){
         boolean rt = false;
         String sql = "UPDATE PRODUCTOS p JOIN CARRITO_DROP c ON p.Id = c.Id_Producto SET p.Stock = GREATEST(p.Stock - c.Cantidad, 0);";
         try {
@@ -346,7 +398,7 @@ public class MetodosBase {
         return rt;
     }
     public ResultSet consultarTodosClientes() {
-        String query = "SELECT Id, NombreCompleto, CorreoElectronico, Contrasena, Cedula, Direccion FROM cliente";
+        String query = "SELECT Id, NombreCompleto, CorreoElectronico, Contrasena, Cedula, Direccion FROM CLIENTE";
         try {
             Statement stmt = cn.createStatement(); 
             rs = stmt.executeQuery(query);  
@@ -358,6 +410,42 @@ public class MetodosBase {
     public void eliminarCliente(int id) {
         String sqlCheck = "SELECT COUNT(*) FROM Cliente WHERE Id = ?";
         String sqlDelete = "DELETE FROM Cliente WHERE Id = ?";
+        PreparedStatement pstmtCheck = null;
+        PreparedStatement pstmtDelete = null;
+        try {
+            // Verificar si el ID existe en la base de datos
+            pstmtCheck = cn.prepareStatement(sqlCheck);
+            pstmtCheck.setInt(1, id);
+            ResultSet rsCheck = pstmtCheck.executeQuery();
+
+            if (rsCheck.next() && rsCheck.getInt(1) > 0) {
+                // El ID existe, proceder con la eliminación
+                pstmtDelete = cn.prepareStatement(sqlDelete);
+                pstmtDelete.setInt(1, id);
+                pstmtDelete.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Cliente eliminado correctamente.");
+            } else {
+                // El ID no existe
+                JOptionPane.showMessageDialog(null, "No existe un cliente con ese ID.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ResultSet consultarTodosProductos() {
+        String query = "SELECT Id, Nombre, Precio, Marca, Descripcion , Categoria, Stock FROM PRODUCTOS";
+        try {
+            Statement stmt = cn.createStatement();
+            rs = stmt.executeQuery(query);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rs;
+    }
+    public void eliminarProducto(int id) {
+        String sqlCheck = "SELECT COUNT(*) FROM PRODUCTOS WHERE Id = ?";
+        String sqlDelete = "DELETE FROM PRODUCTOS WHERE Id = ?";
         PreparedStatement pstmtCheck = null;
         PreparedStatement pstmtDelete = null;
         try {

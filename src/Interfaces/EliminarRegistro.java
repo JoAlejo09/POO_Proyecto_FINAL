@@ -12,28 +12,50 @@ import java.sql.SQLException;
 public class EliminarRegistro {
     public JPanel Pantalla_Admin;
     private JTabbedPane tabbedPane1;
-    private JButton cerrarSesiónButton;
+    private JButton volverButton;
     private JTable Mostrar_Usuarios;  // Cambiado de JTextPane a JTable
     private JTextField Id_Usuario;
     private JButton eliminarButton;
-
+    private JTable mostrar_productos;
+    private JTextField Id_Producto;
+    private JButton eliminarProductoButton;
+    JFrame frame = new JFrame();
+    Metodos metodos = new Metodos(frame);
     public EliminarRegistro() {
         // Configurar la acción del botón cerrar sesión
-        cerrarSesiónButton.addActionListener(new ActionListener() {
+        volverButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor(cerrarSesiónButton);
-                ventanaActual.dispose(); // Cierra la ventana actual
-
-                // Crear una nueva ventana para el panel de invitado
-                JFrame frame = new JFrame();
-                Metodos met = new Metodos(frame);
-                JPanel panel = new Principal_Invitado(0).JPanelP;
-                met.generarVentana("", panel, 725, 350);
+                metodos.generarVentana("",new Principal_Administrador().JPanelAD,725,350);
+                metodos.cerrarVentana(Pantalla_Admin);
             }
         });
+        //Accion del boton eliminar Producto
+        eliminarProductoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String idProductoStr = Id_Producto.getText();
+                if (idProductoStr.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Por favor, ingrese un ID de usuario.");
+                    return;
+                }
+                try {
+                    int idProducto = Integer.parseInt(idProductoStr);  // Convertir el ID a entero
 
-        // Acción del botón eliminar
+                    // Crear una instancia de MetodosBase y eliminar el cliente
+                    MetodosBase metodosBase = new MetodosBase();
+                    metodosBase.eliminarProducto(idProducto);  // Eliminar cliente de la base de datos
+
+
+                    // Refrescar la tabla para mostrar los cambios
+                    mostrarRegistrosClientes();
+
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Por favor, ingrese un ID válido.");
+                }
+            }
+        });
+        // Acción del botón eliminar Cliente
         eliminarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -63,6 +85,7 @@ public class EliminarRegistro {
 
         // Llamar al método para mostrar los registros de clientes en la tabla
         mostrarRegistrosClientes();
+        mostrarRegistrosProductos();
     }
 
     private void mostrarRegistrosClientes() {
@@ -87,6 +110,30 @@ public class EliminarRegistro {
 
                 // Agregar los registros a la tabla
                 model.addRow(new Object[]{id, nombreCompleto, correo, cedula, direccion});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    private void mostrarRegistrosProductos(){
+        MetodosBase metodosBase = new MetodosBase();
+        ResultSet rs = metodosBase.consultarTodosProductos();
+        String[] columnNames = {"ID", "Nombre","Precio","Marca","Descripcion","Categoria", "Stock"};
+        // Crear un modelo de tabla con las columnas definidas
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+        mostrar_productos.setModel(model);  // Establecer el modelo de la tabla
+        try {
+            while (rs.next()) {
+                int id = rs.getInt("Id");
+                String nombre = rs.getString("Nombre");
+                String precio = String.valueOf(rs.getDouble("Precio"));
+                String marca = rs.getString("Marca");
+                String descripcion = rs.getString("Descripcion");
+                String categoria = rs.getString("Categoria");
+                int stock = rs.getInt("Stock");
+
+                //Agregar los registros a la tabla
+                model.addRow(new Object[]{id,nombre,precio,marca,descripcion,categoria,stock});
             }
         } catch (SQLException e) {
             e.printStackTrace();

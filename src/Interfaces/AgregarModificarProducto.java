@@ -1,5 +1,6 @@
 package Interfaces;
 
+import Clases.Metodos;
 import Clases.MetodosBase;
 
 import javax.imageio.ImageIO;
@@ -27,6 +28,9 @@ public class AgregarModificarProducto extends Component {
     private JTextField tMarca;
     private JLabel LImagen;
     private byte[] imageBytes;
+    //Parametros para modificar
+    JFrame frame = new JFrame();
+    Metodos metodos = new Metodos(frame);
     File file;
     MetodosBase base = new MetodosBase();
     //PARA AGREGAR PRODUCTO USAR ESTA INSTANCIA SIN PARAMETROS
@@ -47,6 +51,8 @@ public class AgregarModificarProducto extends Component {
                     }
                     if(insertado){
                         JOptionPane.showMessageDialog(null,"PRODUCTO INSERTADO CORRECTAMENTE","",0);
+                        metodos.generarVentana("", new Principal_Administrador().JPanelAD,350,600);
+                        metodos.cerrarVentana(JPanelAP);
                     }else{
                         JOptionPane.showMessageDialog(null,"NO SE HA PODIDO INGRESAR EL PRODUCTO","",1);
                     }
@@ -56,6 +62,8 @@ public class AgregarModificarProducto extends Component {
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                metodos.generarVentana("", new Principal_Administrador().JPanelAD,725,450);
+                metodos.cerrarVentana(JPanelAP);
 
             }
         });
@@ -97,10 +105,17 @@ public class AgregarModificarProducto extends Component {
                         insertado = base.actualizarProducto(id_producto, tNombreP.getText(),Double.parseDouble(tPrecioP.getText()),tMarca.getText(),tDescripcionP.getText(),tCategoria.getText(),(int) SStock.getValue(),imageBytes);
                     }
                     if(insertado){
-                        JOptionPane.showMessageDialog(null,"PRODUCTO INSERTADO CORRECTAMENTE","",1);
-                    }else{
-                        JOptionPane.showMessageDialog(null,"NO SE HA PODIDO INGRESAR EL PRODUCTO","",0);
+                        JOptionPane.showMessageDialog(null,"PRODUCTO ACTUALIZADO CORRECTAMENTE","",1);
+                        metodos.cerrarVentana(JPanelAP);
+                    }else {
+                        JOptionPane.showMessageDialog(null, "NO SE HA PODIDO ACTUALIZAR EL PRODUCTO", "", 0);
                     }
+                }
+            });
+            cancelarButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    metodos.cerrarVentana(JPanelAP);
 
                 }
             });
@@ -173,6 +188,4 @@ public class AgregarModificarProducto extends Component {
             return null;
         }
     }
-
-
 }
