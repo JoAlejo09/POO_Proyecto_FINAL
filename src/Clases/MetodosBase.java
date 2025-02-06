@@ -11,22 +11,24 @@ import java.time.LocalDateTime;
 
 public class MetodosBase {
 //PRUEBA DE OTRA BASE DE DATOS
-    private String HOST="bx7mgr834vhwqndq7pjj-mysql.services.clever-cloud.com";
+ /*   private String HOST="bx7mgr834vhwqndq7pjj-mysql.services.clever-cloud.com";
     private final String DB="bx7mgr834vhwqndq7pjj";
     private final String USER="uqtw41jnukntizp7";
     private final String PORT="3306";
     private final String PASSWORD="aPYwHRDWLool6PYHCY7C";
-
     private final String URL = "jdbc:mysql://"+HOST+":"+PORT+"/"+DB; //DIRECCIONAMIENTO DE LA BASE DE DATOS PARA CONEXION EN LA NUBE*/
-    /*private static final String HOST="bdbsjb7v8o8wa0pot4lt-mysql.services.clever-cloud.com";
+
+    //DIRECCIONAMIENTO DE LA BASE DE DATOS PARA CONEXION EN LA NUBE*/
+
+    private static final String HOST="bdbsjb7v8o8wa0pot4lt-mysql.services.clever-cloud.com";
     private static final String DB="bdbsjb7v8o8wa0pot4lt";
     private static final String USER="uspitlplqxwpi1ft";
     private static final String PORT="3306";
-    private static final String PASSWORD="vDVAQEeEPO9pvXHzs0ih";*/
-
+    private static final String PASSWORD="vDVAQEeEPO9pvXHzs0ih";
+    private final String URL = "jdbc:mysql://"+HOST+":"+PORT+"/"+DB;
     //Metodo especificado para agregar conexion a base de datos y metodos sobre la base de datos
 
-/*    private String URL = "jdbc:mysql://localhost:3306/tienda_db";
+/*  private String URL = "jdbc:mysql://localhost:3306/tienda_db";
     private String USER = "root";
     private String PASSWORD = "root";*/
     Connection cn;
