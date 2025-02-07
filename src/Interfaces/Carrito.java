@@ -23,11 +23,19 @@ public class Carrito {
     ResultSet rs;
     JFrame frame = new JFrame();
     Metodos metodos = new Metodos(frame);
+
+    /**
+     * Clase Carrito que permite visualizar los productos que estan agregados al carrito de compras
+     * @param id            Id del cliente del cual es la informacion del carrito
+     * @throws SQLException Validacion que permita acceder a la base de datos
+     */
     public Carrito(int id) throws SQLException {
         rs = base.mostrarCarrito();
         llenarTabla(rs);
         calcularTotal();
-
+        /**
+         *quitarDelCarritoButton - Permite seleccionar un elemento del carrito y quitarlo
+         */
         quitarDelCarritoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -44,6 +52,9 @@ public class Carrito {
 
             }
         });
+        /**
+         * vaciarCarritoButton - Permite eliminar todos los productos registrados en el carrito
+         */
         vaciarCarritoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -57,6 +68,10 @@ public class Carrito {
                 }
             }
         });
+        /**
+         * volverButton - Permite cancelar cualquier accion del carrito y vuelve a la ventana
+         * anterior
+         */
         volverButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -64,7 +79,9 @@ public class Carrito {
                 metodos.cerrarVentana(JPanelCR);
             }
         });
-
+        /**
+         * Genera la factura tomando los productos que se encuentran en el carrito
+         */
         realizarLaCompraButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -77,6 +94,12 @@ public class Carrito {
             }
         });
     }
+
+    /**
+     *
+     * @param rs ResultSet que contiene la informacion de la Tabla CARRITO_DROP
+     * @throws SQLException Excepcion que permite leer la informacion del ResultSet
+     */
     public void llenarTabla(ResultSet rs) throws SQLException {
         modelo = new DefaultTableModel();
         modelo.addColumn("ID");
@@ -101,6 +124,11 @@ public class Carrito {
         tCarrito.getColumnModel().getColumn(0).setMaxWidth(0);
         tCarrito.getColumnModel().getColumn(0).setWidth(0);
     }
+
+    /**
+     * Clase que calcula el total de valor de los productos que estan en el carrito
+     * @return total de pagar de los productos del carrito
+     */
     public double calcularTotal() {
         double total = 0.0;
         if(!(tCarrito.getRowCount() == 0)){
@@ -115,6 +143,11 @@ public class Carrito {
         }
         return total;
     }
+
+    /**
+     * Clase que permite obtener el id del producto que ha sido seleccionado
+     * @return int que muestre el id del producto seleccionado
+     */
     public int obtenerSeleccionado(){
         int id_carrito=-1;
         int filaSeleccionada = tCarrito.getSelectedRow();

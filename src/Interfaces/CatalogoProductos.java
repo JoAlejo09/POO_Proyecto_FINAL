@@ -28,18 +28,30 @@ public class CatalogoProductos {
     JFrame frame = new JFrame();
     Metodos metodos= new Metodos(frame);
     MetodosBase met = new MetodosBase();
+
+    /**
+     *
+     * @param estado    Rol del usuario
+     * @param id        Id en caso de que el rol sea Cliente
+     */
     public CatalogoProductos(int estado, int id) {
         cargarDatosEnTabla("TODOS");  // Inicializar con todos los productos
         cargarCategoriasEnTree();
         inicializarComboBox();
         validarBotones(id,estado); //Valida que botones debe aparecer si es invitado,cliente o administrador
-
+        /**
+         *boton_de_busqueda - Realiza la busqueda del producto
+         *boton_de_volver - Cancela la accion de Catalogo Productos y vuelve a la ventana anterior
+         */
         // Acciones de los botones
         boton_de_busqueda.addActionListener(e -> realizarBusqueda());
         boton_de_volver.addActionListener(e -> {
             abrirFormularioRegistro(id,estado);
             metodos.cerrarVentana(panel1);  // Cerrar la ventana actual
         });
+        /**
+         *agregarCarritoButton - Agrega al carrito un producto seleccionado del catalogo
+         */
         agregarCarritoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -51,17 +63,15 @@ public class CatalogoProductos {
                 }
             }
         });
+        /**
+         *editarProductoButton - Permite editar un producto seleccionado
+         */
         editarProductoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String producto = obtenerProducto();
                 int id=0;
-                try {
-                    id = met.consultarProductoEditar(producto);
-                } catch (SQLException ex)
-                {
-                    throw new RuntimeException(ex);
-                }
+                id = met.consultarProductoEditar(producto);
                 if(id==0){
                     JOptionPane.showMessageDialog(null,"NO SE HA SELECCIONADO NINGUN PRODUCTO PARA EDITAR","",1);
                 }else{
@@ -72,6 +82,14 @@ public class CatalogoProductos {
             }
         });
     }
+
+    /**
+     *
+     * @param id - Id del cliente
+     * @param est - Estado del usuario
+     * @return devuelve el panel el cual se condiciona para la siguiente ventana sea para Invitado,
+     * Cliente o Administrador
+     */
     private JPanel validarCierreVentana(int id, int est){
         JPanel panel = null;
         if(est==1){
@@ -87,6 +105,12 @@ public class CatalogoProductos {
         }
         return panel;
     }
+
+    /**
+     * Clase que valida las componentes que se muestran al usuario dependiendo de su estado
+     * @param id - Id del Cliente solo para estado del usuario Cliente
+     * @param est - Estado del usuario del programa
+     */
     private void validarBotones(int id,int est){
         if(est==0){
             agregarCarritoButton.setVisible(false);
@@ -102,6 +126,10 @@ public class CatalogoProductos {
             editarProductoButton.setVisible(false);
         }
     }
+
+    /**
+     * Clase que inicializa el ComboBox para busquedas
+     */
     private void inicializarComboBox() {
         buscar_segun.removeAllItems();
         buscar_segun.addItem("Nombre");
@@ -109,6 +137,11 @@ public class CatalogoProductos {
         buscar_segun.addItem("Precio");
     }
 
+    /**
+     * Clase que carga datos de los productos que sean de una determinada categoria
+     * en la Tabla para mostrar
+     * @param categoria - Parametro de busqueda de productos
+     */
     private void cargarDatosEnTabla(String categoria) {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Producto 1");
@@ -169,6 +202,9 @@ public class CatalogoProductos {
         tabla_de_productos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
+    /**
+     * Metodo que permite realizar busqueda de productos en funcion de categoria y nombre del producto
+     */
     private void realizarBusqueda() {
         String criterioBusqueda = (String) buscar_segun.getSelectedItem();
         String valorBusqueda = ingreso_de_busqueda.getText().trim();
@@ -222,6 +258,9 @@ public class CatalogoProductos {
         }
     }
 
+    /**
+     * Metodo que permite cargar el listado de Categorias que estan en la base de datos
+     */
     private void cargarCategoriasEnTree() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Categorías");
 

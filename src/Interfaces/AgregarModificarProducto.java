@@ -34,15 +34,25 @@ public class AgregarModificarProducto extends Component {
     File file;
     MetodosBase base = new MetodosBase();
     //PARA AGREGAR PRODUCTO USAR ESTA INSTANCIA SIN PARAMETROS
+
+    /**
+     * Constructor que permite agregar un producto
+     */
     public AgregarModificarProducto(){
         SStock.setModel(new SpinnerNumberModel(5,1,100,1));
-            BCargarImagen.addActionListener(new ActionListener() {
+        /**
+         * BCargarImagen permite seleccionar una imagen
+         */
+        BCargarImagen.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     seleccionarImagen();
                 }
             });
-            agregarButton.addActionListener(new ActionListener() {
+        /**
+         * agregarButton - Permite añadir un nuevo Producto una vez este el formulario lleno
+         */
+        agregarButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     boolean insertado = false;
@@ -59,6 +69,9 @@ public class AgregarModificarProducto extends Component {
 
                 }
             });
+        /**
+         * cancelarButton - Cancela la creacion de un nuevo producto y regresa a la ventana anterior
+         */
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -69,6 +82,11 @@ public class AgregarModificarProducto extends Component {
         });
     }
     //PARA MODIFICAR DATOS USAR ESTA INSTANCIA YA QUE SE REQUIRE EL ID DEL PRODUCTO A MODIFICAR SUS VALORES
+
+    /**
+     * Constructor que permite modificar un producto de la Tabla PRODUCTOS dado un Id
+     * @param id_producto   Id del producto a modificar
+     */
     public AgregarModificarProducto(int id_producto){
         ResultSet rs = base.consultarProductosId(id_producto);
         agregarButton.setText("Actualizar");
@@ -91,12 +109,18 @@ public class AgregarModificarProducto extends Component {
             LImagen.setIcon(icon);
             LImagen.setText("");
             tImagenP.setText("Imagen Base de Datos.jpeg");
+            /**
+             * BCargarImagen - Permite cambiar la imagen existente en el registro de Producto por una nueva
+             */
             BCargarImagen.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     seleccionarImagen();
                 }
             });
+            /**
+             * agregarButton - Actualiza los valores del producto seleccionado por los del formulario
+             */
             agregarButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -112,6 +136,9 @@ public class AgregarModificarProducto extends Component {
                     }
                 }
             });
+            /**
+             * cancelarButton - Cancela la accion de modificar producto y regresa a la ventana anterior
+             */
             cancelarButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -126,6 +153,11 @@ public class AgregarModificarProducto extends Component {
     }
 
     //FUNCIONES PARA VALIDACION Y EJECUCION
+
+    /**
+     * Clase que valida que las casillas de texto para poder ejercer la accion(agregar o modificar)
+     * @return true si los datos ingresados son validos o false si hay errores
+     */
     public boolean validarDatos(){
         boolean status = true;
         if (tNombreP.getText().isEmpty()){
@@ -148,6 +180,11 @@ public class AgregarModificarProducto extends Component {
         }
         return status;
     }
+
+    /**
+     * Clase que permite cargar una imagen desde el directorio del computador y convertirla en bytes
+     * para almacenar en la base de datos
+     */
     public void seleccionarImagen() {
         JFileChooser fileChooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de Imagen (*.jpg, *.png, *.gif)", "jpg", "png", "gif");
@@ -179,6 +216,14 @@ public class AgregarModificarProducto extends Component {
         }
 
     }
+
+    /**
+     * Clase que convierte la informacion recibida del atributo Imagen de la tabla PRODUCTOS
+     * de la base de datos en una Imagen.
+     * @param imageBytes    Atributo que recibe la imagen almacenada en la base de datos
+     * @return imagen procesada desde los bytes que se recibieron del atributo Imagen de la Tabla PRODUCTOS
+     *         de la base de datos
+     */
     public BufferedImage cargarImagen(byte[] imageBytes) {
         try {
             ByteArrayInputStream bais = new ByteArrayInputStream(imageBytes);
