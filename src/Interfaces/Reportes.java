@@ -43,7 +43,6 @@ public class Reportes {
     //PARA ADMINISTRADOR
     public Reportes(){
         agregarBotones();
-        realizarPagoButton.setVisible(false);
         generarReporteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

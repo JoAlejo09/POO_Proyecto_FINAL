@@ -1,16 +1,12 @@
 //proyecto poo
-//OCHOA,BETANCOURT,CARDENAS,PILA
-
+//OCHOA,BETANCOURT,PILA
 package Clases;
-
 import javax.swing.*;
-
 /**
  * Clase que gestiona las acciones con las ventanas (creacion, cierre)
  */
 public class Metodos extends JFrame {
     JFrame frame = new JFrame();
-
     /**
      * Metodos es el constructor que llama al Frame que recibira las componentes de la siguiente ventana
      *
@@ -20,7 +16,6 @@ public class Metodos extends JFrame {
     public Metodos(JFrame frame) {
         this.frame = frame;
     }
-
     /**
      * Metodo que crea la ventana y la muestra en pantalla
      * @param titulo    Nombre de la Ventana

@@ -1,15 +1,11 @@
-//proyecto poo
-//OCHOA,BETANCOURT,CARDENAS,PILA
+//Proyecto poo
+//OCHOA,BETANCOURT,PILA,CARDENAS
 package Clases;
-import Interfaces.Principal_Administrador;
-import Interfaces.Principal_Cliente;
 import Interfaces.Principal_Invitado;
-
 import javax.swing.*;
-import java.sql.SQLException;
 /**
  * Main Ejecuta la ventana Principal donde iniciara el programa la cual es Invitado.
- * @author Jose Pila, Xavier Ochoa, Sebastian Betancourt
+ * @author Jose Pila, Xavier Ochoa, Sebastian Betancourt, Mateo Cardenas
  * @version 1.0
  * @since 2025
  */
@@ -27,6 +23,5 @@ public class Main{
         JPanel panel;
         panel = new Principal_Invitado(0).JPanelP;
         met.generarVentana("",panel,725,450);
-
     }
 }

@@ -23,6 +23,7 @@ public class AgregarCarrito {
     private JLabel LPrecio;
     private JLabel LMarca;
     private JLabel LCategoria;
+    private JLabel LStock;
     ResultSet rs;
     JFrame frame = new JFrame();
     Metodos met = new Metodos(frame);
@@ -61,6 +62,7 @@ public class AgregarCarrito {
         LPrecio.setText("Precio:  $"+precio);
         LMarca.setText("\nMarca:  "+marca);
         LCategoria.setText("Categoria: "+categoria);
+        LStock.setText("Stock: "+stock);
         SStock.setModel(new SpinnerNumberModel(1,1,stock,1));
         /**
          * agregarCarritoButton agrega un nuevo registro al carrito una vez seleccionado el producto

@@ -1,26 +1,14 @@
 //proyecto poo
-//OCHOA,BETANCOURT,CARDENAS,PILA
-/**
- * Clase que contiene metodos y validaciones de la base de datos
- */
+//OCHOA,BETANCOURT,PILA
 package Clases;
 import javax.swing.*;
 import java.sql.*;
 import java.time.LocalDateTime;
 /**
- * Clase que implementa las consultas hacia la base de datos
+ * Clase que contiene metodos y validaciones de la base de datos
  */
 public class MetodosBase {
     //DIRECCIONAMIENTO DE LA BASE DE DATOS PARA CONEXION EN LA NUBE*/
-
-    /*private static final String HOST="bdbsjb7v8o8wa0pot4lt-mysql.services.clever-cloud.com";
-    private static final String DB="bdbsjb7v8o8wa0pot4lt";
-    private static final String USER="uspitlplqxwpi1ft";
-    private static final String PORT="3306";
-    private static final String PASSWORD="vDVAQEeEPO9pvXHzs0ih";
-    private final String URL = "jdbc:mysql://"+HOST+":"+PORT+"/"+DB;
-    //Metodo especificado para agregar conexion a base de datos y metodos sobre la base de datos*/
-
     /**
      * @param URL       Direccion de la base de datos
      * @param USER      Parametro de conexion a la base de datos
@@ -31,9 +19,16 @@ public class MetodosBase {
     private String URL = "jdbc:mysql://localhost:3306/tienda_db";
     private String USER = "root";
     private String PASSWORD = "root";
+    //Metodo especificado para agregar conexion a base de datos y metodos sobre la base de datos
+   /* private static final String HOST="bdbsjb7v8o8wa0pot4lt-mysql.services.clever-cloud.com";
+    private static final String DB="bdbsjb7v8o8wa0pot4lt";
+    private static final String USER="uspitlplqxwpi1ft";
+    private static final String PORT="3306";
+    private static final String PASSWORD="vDVAQEeEPO9pvXHzs0ih";
+    private final String URL = "jdbc:mysql://"+HOST+":"+PORT+"/"+DB;*/
+
     Connection cn;
     ResultSet rs;
-
     /**
      * Metodo que establece la conexion con la base de datos
      */
@@ -79,7 +74,6 @@ public class MetodosBase {
             throw new RuntimeException(e);
         }
     }
-
     /**
      * Añade un nuevo registro del Cliente
      *
@@ -185,7 +179,6 @@ public class MetodosBase {
             throw new RuntimeException(e);
         }
     }
-
     /**
      * Metodo que inserta un nuevo registro en la Tabla PRODUCTOS
      * @param nombre        Nombre del producto - String
