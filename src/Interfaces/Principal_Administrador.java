@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Ventana de Administrador que conecta con todas las acciones que puede hacer
+ */
 public class Principal_Administrador {
     private JButton cerrarSesionButton;
     private JButton salirButton;

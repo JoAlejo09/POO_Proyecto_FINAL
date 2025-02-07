@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  */
 public class Validaciones {
     /**
-     * Clase que valida que sea la estructura de un correo electronico
+     * Metodo que valida que sea la estructura de un correo electronico
      * @param correo String del correo a validar
      * @return  boolean true si cumple con la validacion del correo y false si no
      */
@@ -29,7 +29,7 @@ public class Validaciones {
     }
 
     /**
-     * Clase que valida que el password tenga minimo 8 caracteres
+     * Metodo que valida que el password tenga minimo 8 caracteres
      * @param password  Contraseña a validar
      * @return true si la contraseña es valida y false si no
      */

@@ -10,6 +10,9 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Clase que genera la ventana para Agregar un nuevo producto al Carrito de Compras
+ */
 public class AgregarCarrito {
     public JPanel JPanelAC;
     private JSpinner SStock;

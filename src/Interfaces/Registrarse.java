@@ -9,6 +9,9 @@ import Clases.Validaciones;
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+ * Ventana que permite registrar a un nuevo usuario
+ */
 public class Registrarse {
     private JTextField tNombre;
     private JTextField tApellido;

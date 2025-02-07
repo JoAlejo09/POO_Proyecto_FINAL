@@ -8,6 +8,9 @@ import Clases.Validaciones;
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+ * Clase que valida que las credenciales de un usuario esten en la base de datos
+ */
 public class Login {
     private JTextField tUsuario;
     private JPasswordField pPassword;

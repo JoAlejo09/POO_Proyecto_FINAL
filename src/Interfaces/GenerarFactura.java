@@ -9,6 +9,9 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Clase que permite generar una nueva factura con la informacion necesaria
+ */
 public class GenerarFactura {
     private JTextField tNro;
     private JTextField tNombre;

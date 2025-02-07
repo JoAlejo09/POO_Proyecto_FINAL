@@ -15,6 +15,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que permite visualizar un catalogo de productos y realizar otras acciones sobre este
+ * dependiendo del usuario
+ */
 public class CatalogoProductos {
     public JPanel panel1;
     private JTextField ingreso_de_busqueda;
@@ -107,7 +111,7 @@ public class CatalogoProductos {
     }
 
     /**
-     * Clase que valida las componentes que se muestran al usuario dependiendo de su estado
+     * Metodo que valida las componentes que se muestran al usuario dependiendo de su estado
      * @param id - Id del Cliente solo para estado del usuario Cliente
      * @param est - Estado del usuario del programa
      */
@@ -128,7 +132,7 @@ public class CatalogoProductos {
     }
 
     /**
-     * Clase que inicializa el ComboBox para busquedas
+     * Metodo que inicializa el ComboBox para busquedas
      */
     private void inicializarComboBox() {
         buscar_segun.removeAllItems();
@@ -138,7 +142,7 @@ public class CatalogoProductos {
     }
 
     /**
-     * Clase que carga datos de los productos que sean de una determinada categoria
+     * Metodo que carga datos de los productos que sean de una determinada categoria
      * en la Tabla para mostrar
      * @param categoria - Parametro de busqueda de productos
      */

@@ -7,7 +7,9 @@ package Clases;
 import javax.swing.*;
 import java.sql.*;
 import java.time.LocalDateTime;
-
+/**
+ * Clase que implementa las consultas hacia la base de datos
+ */
 public class MetodosBase {
     //DIRECCIONAMIENTO DE LA BASE DE DATOS PARA CONEXION EN LA NUBE*/
 
@@ -33,7 +35,7 @@ public class MetodosBase {
     ResultSet rs;
 
     /**
-     * clase que establece la conexion con la base de datos
+     * Metodo que establece la conexion con la base de datos
      */
     public MetodosBase() {
         try {
@@ -48,7 +50,7 @@ public class MetodosBase {
         }
     }
     /**
-     * clase que valida si el usuario esta registrado en la base de datos
+     * Metodo que valida si el usuario esta registrado en la base de datos
      * @param rol       Que privilegios quiere el usuario que se registra(Cliente, Administrador)
      * @param correo    Almacena el correo del usuario  para la consulta
      * @param password  Almacena la contraseña del usuario para la consulta
@@ -148,7 +150,7 @@ public class MetodosBase {
         return rs;
     }
     /**
-     * clase que busca productos acorde a un criterio/condicion y en funcion de
+     * Metodo que busca productos acorde a un criterio/condicion y en funcion de
      * @param criterioBusqueda
      * @param valorBusqueda
      * @return un ResultSet con registro de Productos (Id, Nombre, Marca, Categoria,Stock)
@@ -164,7 +166,7 @@ public class MetodosBase {
         return rs;
     }
     /**
-     * clase que obtiene informacion Nombre del Cliente
+     * Metodo que obtiene informacion Nombre del Cliente
      * @param id       id del cliente de la Tabla CLIENTE en la base de datos
      * @return devuelve un String con el nombre del Cliente
      */
@@ -185,7 +187,7 @@ public class MetodosBase {
     }
 
     /**
-     * Clase que inserta un nuevo registro en la Tabla PRODUCTOS
+     * Metodo que inserta un nuevo registro en la Tabla PRODUCTOS
      * @param nombre        Nombre del producto - String
      * @param precio        Precio del producto - Double
      * @param marca         Marca del producto - String
@@ -221,7 +223,7 @@ public class MetodosBase {
     }
 
     /**
-     * clase que actualiza la información de un producto en la tabla PRODUCTOS
+     * Metodo que actualiza la información de un producto en la tabla PRODUCTOS
      * @param id            Id del producto - Int
      * @param nombre        Nombre del producto - String
      * @param precio        Precio del producto - Double
@@ -258,7 +260,7 @@ public class MetodosBase {
         }
     }
     /**
-     * clase que consulta todos los reportes de facturas y pagos realizados para Administrador
+     * Metodo que consulta todos los reportes de facturas y pagos realizados para Administrador
      * @param opcion    opcion de seleccion de facturas o pagos
      * @return ResultSet con todos los registros de facturas o pagos
      */
@@ -278,7 +280,7 @@ public class MetodosBase {
         return rs;
     }
     /**
-     * Clase que consulta todos los reportes de facturas y pagos realizados de un Cliente
+     * Metodo que consulta todos los reportes de facturas y pagos realizados de un Cliente
      * @param opcion    opcion de seleccion de reporte (facturas o pagos)
      * @param id        id del cliente de la Tabla CLIENTES para la busqueda
      * @return ResultSet con los registros de facturas o pagos para un cliente con un determinado id
@@ -300,7 +302,7 @@ public class MetodosBase {
         return rs;
     }
     /**
-     * Clase que obtiene informacion de un producto del Carrito
+     * Metodo que obtiene informacion de un producto del Carrito
      * @param producto      nombre del Producto para busqueda
      * @return ResultSet con el registro del Producto que esta en el Carrito
      */
@@ -316,7 +318,7 @@ public class MetodosBase {
         return rs;
     }
     /**
-     * Clase que agrega un producto con stock existente al carrito de compras (Tabla CARRITO_DROP)
+     * Metodo que agrega un producto con stock existente al carrito de compras (Tabla CARRITO_DROP)
      * @param id_producto       Id del producto para agregar al Carrito
      * @param cantidad           Cantidad del producto agregado al Carrito
      * @return true si se ha agregado correctamente el registro del producto a Tabla CARRITO_DROP
@@ -339,7 +341,7 @@ public class MetodosBase {
         return rt;
     }
     /**
-     * Clase que consulta el id del producto para editarlo a partir del nombre
+     * Metodo que consulta el id del producto para editarlo a partir del nombre
      * @param producto      Nombre del producto para obtener el id
      * @deprecated
      * @return un entero con el id del producto para obtener su información
@@ -363,7 +365,7 @@ public class MetodosBase {
         }
     }
     /**
-     * Clase que consulta todos los registros que estan agregados en la Tabla CARRITO_DROP
+     * Metodo que consulta todos los registros que estan agregados en la Tabla CARRITO_DROP
      * @return ResultSet con los registros que se encuentran en la tabla CARRITO_DROP
      */
     public ResultSet mostrarCarrito() {
@@ -380,7 +382,7 @@ public class MetodosBase {
         return rs;
     }
     /**
-     * Clase que elemina registro de una Tabla de la base de datos
+     * Metodo que elemina registro de una Tabla de la base de datos
      * @param id        identificador del elemento para eliminar de una Tabla
      * @param tabla     Nombre de la tabla de la base de datos donde se eliminaran registros
      */
@@ -396,7 +398,7 @@ public class MetodosBase {
         }
     }
     /**
-     * Clase que elimina todos los registros de una Tabla de la base de datos
+     * Metodo que elimina todos los registros de una Tabla de la base de datos
      * @param tabla     Nombre de la tabla de la cual se eliminaran todos los registros
      */
     public void resetearTabla(String tabla) {
@@ -410,7 +412,7 @@ public class MetodosBase {
         }
     }
     /**
-     * Clase que consulta la informacion de un Cliente con un id especifico
+     * Metodo que consulta la informacion de un Cliente con un id especifico
      * @param id    Identificador del Cliente
      * @return ResultSet con todos los valores del registro consultado
      */
@@ -427,7 +429,7 @@ public class MetodosBase {
         return rs;
     }
     /**
-     * Clase que me permite obtener el id de la ultima factura creada
+     * Metodo que me permite obtener el id de la ultima factura creada
      * @return Int con el valor de id de la ultima factura creada
      */
     public ResultSet consultarNroFactura(){
@@ -443,7 +445,7 @@ public class MetodosBase {
 
     }
     /**
-     * Clase que permite agregar un registro en la Tabla Factura
+     * Metodo que permite agregar un registro en la Tabla Factura
      * @param nombre        Nombre del Cliente
      * @param valor         Valor de la factura
      * @param estado        Estado de la factura(Pagado, Pendiente)
@@ -470,7 +472,7 @@ public class MetodosBase {
         return rt;
     }
     /**
-     * Clase que consulta la ultima factura creada para un cliente
+     * Metodo que consulta la ultima factura creada para un cliente
      * @param id_cliente    Id del cliente para buscar su factura
      * @return  Int con el id de la ultima factura del usuario
      */
@@ -492,7 +494,7 @@ public class MetodosBase {
         }
     }
     /**
-     * Clase que agrega un pago realizado de un cliente para una factura
+     * Metodo que agrega un pago realizado de un cliente para una factura
      * @param id_factura    Id de la factura a pagar
      * @param id_cliente    Id del cliente de la factura a pagar
      * @param valor         Valor a Pagar
@@ -518,7 +520,7 @@ public class MetodosBase {
             }
         }
     /**
-     * Clase que actualiza el stock de los productos despues de una compra (Factura)
+     * Metodo que actualiza el stock de los productos despues de una compra (Factura)
      * @return boolean true si se realizo la actualizacion o false si no se actualizo
      */
     public boolean actualizarStockProductos(){
@@ -536,7 +538,7 @@ public class MetodosBase {
         return rt;
     }
     /**
-     * Clase que consulta todos los clientes que estan en la Tabla CLIENTES de la base de datos
+     * Metodo que consulta todos los clientes que estan en la Tabla CLIENTES de la base de datos
      * @return ResultSet con todos los registros de Clientes
      */
     public ResultSet consultarTodosClientes() {
@@ -550,7 +552,7 @@ public class MetodosBase {
         return rs;  
     }
     /**
-     * Clase que elimina un cliente de la Tabla CLIENTE de la base de datos
+     * Metodo que elimina un cliente de la Tabla CLIENTE de la base de datos
      * @param id    id del Cliente a eliminar
      */
     public void eliminarCliente(int id) {
@@ -579,7 +581,7 @@ public class MetodosBase {
         }
     }
     /**
-     * Clase que obtiene todos los registros de Producto de la Tabla PRODUCTO
+     * Metodo que obtiene todos los registros de Producto de la Tabla PRODUCTO
      * @return ResultSet con todos los registros de Productos
      */
     public ResultSet consultarTodosProductos() {
@@ -593,7 +595,7 @@ public class MetodosBase {
         return rs;
     }
     /**
-     *Clase que elimina un producto de la Tabla PRODUCTOS de la base de datos
+     *Metodo que elimina un producto de la Tabla PRODUCTOS de la base de datos
      * @param id    id del Producto a eliminar
      */
     public void eliminarProducto(int id) {

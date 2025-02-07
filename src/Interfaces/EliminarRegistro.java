@@ -9,6 +9,9 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Clase que permite eliminar registros de Clientes y Productos solo por el Administrador
+ */
 public class EliminarRegistro {
     public JPanel Pantalla_Admin;
     private JTabbedPane tabbedPane1;

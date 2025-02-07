@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+/**
+ * Venta del Cliente donde puede realizar sus acciones
+ */
 public class Principal_Cliente {
     private JMenuItem mCatalogo;
     private JMenuItem mCategorias;

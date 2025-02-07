@@ -10,6 +10,9 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Clase Carrito que simula un carrito de compras donde el usuario agrega productos que pueda que compre
+ */
 public class Carrito {
     public JPanel JPanelCR;
     private JButton quitarDelCarritoButton;
@@ -25,7 +28,7 @@ public class Carrito {
     Metodos metodos = new Metodos(frame);
 
     /**
-     * Clase Carrito que permite visualizar los productos que estan agregados al carrito de compras
+     * Metodo Carrito que permite visualizar los productos que estan agregados al carrito de compras
      * @param id            Id del cliente del cual es la informacion del carrito
      * @throws SQLException Validacion que permita acceder a la base de datos
      */
@@ -126,7 +129,7 @@ public class Carrito {
     }
 
     /**
-     * Clase que calcula el total de valor de los productos que estan en el carrito
+     * Metodo que calcula el total de valor de los productos que estan en el carrito
      * @return total de pagar de los productos del carrito
      */
     public double calcularTotal() {
@@ -145,7 +148,7 @@ public class Carrito {
     }
 
     /**
-     * Clase que permite obtener el id del producto que ha sido seleccionado
+     * Metodo que permite obtener el id del producto que ha sido seleccionado
      * @return int que muestre el id del producto seleccionado
      */
     public int obtenerSeleccionado(){

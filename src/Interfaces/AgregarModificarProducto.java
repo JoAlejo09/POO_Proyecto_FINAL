@@ -14,6 +14,11 @@ import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Clase que crea una ventana y componentes para poder agregar un nuevo producto o modificar
+ * la informacion de un producto existente
+ */
+
 public class AgregarModificarProducto extends Component {
     private JTextField tNombreP;
     private JTextField tPrecioP;
@@ -155,7 +160,7 @@ public class AgregarModificarProducto extends Component {
     //FUNCIONES PARA VALIDACION Y EJECUCION
 
     /**
-     * Clase que valida que las casillas de texto para poder ejercer la accion(agregar o modificar)
+     * Metodo que valida que las casillas de texto para poder ejercer la accion(agregar o modificar)
      * @return true si los datos ingresados son validos o false si hay errores
      */
     public boolean validarDatos(){
@@ -182,7 +187,7 @@ public class AgregarModificarProducto extends Component {
     }
 
     /**
-     * Clase que permite cargar una imagen desde el directorio del computador y convertirla en bytes
+     * Metodo que permite cargar una imagen desde el directorio del computador y convertirla en bytes
      * para almacenar en la base de datos
      */
     public void seleccionarImagen() {
@@ -218,7 +223,7 @@ public class AgregarModificarProducto extends Component {
     }
 
     /**
-     * Clase que convierte la informacion recibida del atributo Imagen de la tabla PRODUCTOS
+     * Metodo que convierte la informacion recibida del atributo Imagen de la tabla PRODUCTOS
      * de la base de datos en una Imagen.
      * @param imageBytes    Atributo que recibe la imagen almacenada en la base de datos
      * @return imagen procesada desde los bytes que se recibieron del atributo Imagen de la Tabla PRODUCTOS

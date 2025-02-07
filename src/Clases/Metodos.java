@@ -6,8 +6,6 @@ package Clases;
 import javax.swing.*;
 
 /**
- * @version 1.0
- * @since 2025
  * Clase que gestiona las acciones con las ventanas (creacion, cierre)
  */
 public class Metodos extends JFrame {
@@ -24,7 +22,7 @@ public class Metodos extends JFrame {
     }
 
     /**
-     * Clase que crea la ventana y la muestra en pantalla
+     * Metodo que crea la ventana y la muestra en pantalla
      * @param titulo    Nombre de la Ventana
      * @param panel     Contenedor de componentes a mostrar en la ventana (botones, paneles, texto, etc)
      * @param w         Ancho de la ventana
@@ -42,7 +40,7 @@ public class Metodos extends JFrame {
     }
 
     /**
-     * Clase que cierra una ventana que no se va a usar
+     * Metodo que cierra una ventana que no se va a usar
      * @param panel     Contenedor de componentes a mostrar en la ventana (botones, paneles, texto, etc)
      */
     public void cerrarVentana(JPanel panel) {

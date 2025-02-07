@@ -18,11 +18,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Clase que genera los Reportes de Facturas y Pagos de Clientes
+ */
 public class Reportes {
     private JTable taReportes;
     private JRadioButton facturasRadioButton;

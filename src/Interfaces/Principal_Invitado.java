@@ -9,6 +9,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Ventana de usuario sin registrarse
+ */
 public class Principal_Invitado {
     public JPanel JPanelP;
     private JMenuItem mCatalogo;
