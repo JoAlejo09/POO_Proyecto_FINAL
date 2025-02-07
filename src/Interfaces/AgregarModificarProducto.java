@@ -66,7 +66,7 @@ public class AgregarModificarProducto extends Component {
                     }
                     if(insertado){
                         JOptionPane.showMessageDialog(null,"PRODUCTO INSERTADO CORRECTAMENTE","",0);
-                        metodos.generarVentana("", new Principal_Administrador().JPanelAD,350,600);
+                        metodos.generarVentana("", new Principal_Administrador().JPanelAD,600,350);
                         metodos.cerrarVentana(JPanelAP);
                     }else{
                         JOptionPane.showMessageDialog(null,"NO SE HA PODIDO INGRESAR EL PRODUCTO","",1);
