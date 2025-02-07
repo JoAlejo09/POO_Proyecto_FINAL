@@ -29,6 +29,12 @@ public class AgregarCarrito {
     double precio = 0;
     int stock=0;
     byte[] imagenBytes;
+    /**
+     * Constructor AgregarCarrito que inicializa la Ventana AgregarCarrito y que permite que
+     * una vez seleccionado el producto a agregar se valide si quiere y cuantos productos quiera
+     * @param producto  Nombre del producto seleccionado del carrito
+     * @throws SQLException Excepcion que si puede realizar la consulta en la base de datos
+     */
     public AgregarCarrito(String producto) throws SQLException {
         rs = base.obtenerProductoCarrito(producto);
         if (rs.next()){
@@ -53,7 +59,9 @@ public class AgregarCarrito {
         LMarca.setText("\nMarca:  "+marca);
         LCategoria.setText("Categoria: "+categoria);
         SStock.setModel(new SpinnerNumberModel(1,1,stock,1));
-
+        /**
+         * agregarCarritoButton agrega un nuevo registro al carrito una vez seleccionado el producto
+         */
         agregarCarritoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -69,6 +77,9 @@ public class AgregarCarrito {
                 }
             }
         });
+        /**
+         * cancelarButton cancela las acciones de AgregarCarrito
+         */
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

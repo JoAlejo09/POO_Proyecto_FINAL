@@ -9,7 +9,17 @@ import javax.swing.*;
 import java.sql.SQLException;
 
 public class Main{
-    public static void main(String[] args) throws SQLException {
+    /**
+     * Main Ejecuta la ventana Principal donde iniciara el programa la cual es Invitado.
+     * @param args
+     * @author Jose Pila, Xavier Ochoa, Sebastian Betancourt
+     * @version 1.0
+     * @since 2025
+     */
+    public static void main(String[] args){
+        /**
+         * Metodos de llamado para inicializar la ventana Inicial
+         */
         JFrame frame = new JFrame();
         Metodos met = new Metodos(frame);
         JPanel panel;
