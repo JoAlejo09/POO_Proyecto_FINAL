@@ -1,12 +1,16 @@
-CARPETA 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SmartShop - Plataforma de Compras en Línea
+
+CARPETAS DIIRECTORIO
 
 SRC - CODIGO DE PROYECTO
 
 JAVADOC - DOCUMENTACION DE JAVADOC 
---------------------------------------------------------------------------------------------------------------------------------------------------------
 
-SmartShop - Plataforma de Compras en Línea
-Proyeco en cual busca facilitar la experiencia de compra para consumidores en línea. 
+
+Proyecto en cual busca facilitar la experiencia de compra para consumidores en línea. 
 Haciendo uso de varios requerimientos que se fue aprendiendo en clase como un login, ademas de un catálogo de productos, carrito de compras, procesamiento de pagos, generación de facturas.
 ![image](https://github.com/user-attachments/assets/c16ee218-ebc2-4fd2-8f9c-178998607ce4)
 ![image](https://github.com/user-attachments/assets/45d5df1e-b80d-46a4-b35d-061fb000bba4)
