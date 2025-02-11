@@ -9,6 +9,10 @@ SRC - CODIGO DE PROYECTO
 
 JAVADOC - DOCUMENTACION DE JAVADOC 
 
+tienda_db.sql - BASE DE DATOS IMPLEMENTADA
+
+GR.5 - REQUERIMIENTOS- Smartshop.docx - DOCUMENTOS DE REQUERIMIENTOS
+
 
 Proyecto en cual busca facilitar la experiencia de compra para consumidores en línea. 
 Haciendo uso de varios requerimientos que se fue aprendiendo en clase como un login, ademas de un catálogo de productos, carrito de compras, procesamiento de pagos, generación de facturas.
